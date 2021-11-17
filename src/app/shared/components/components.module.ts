@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { S2pInputComponent } from './s2p-input/s2p-input.component';
+import { InputComponent } from './input/input.component';
+import { ButtonComponent } from './button/button.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
-    S2pInputComponent
+    AlertComponent,
+    ButtonComponent,
+    InputComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    S2pInputComponent
+    AlertComponent,
+    ButtonComponent,
+    InputComponent
   ]
 })
 export class ComponentsModule { }
