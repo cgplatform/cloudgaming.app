@@ -1,7 +1,7 @@
-<button  (click)="click()">
-    <div *ngIf="!isLoading">
-        X
-        <ng-content></ng-content>
-    </div>
-    <div *ngIf="isLoading">Carregando</div>
+<button  class="blue" (click)="click()">
+    <div></div>
+    <div class="content"><ng-content></ng-content></div>
+    <div class="line"></div>
+    <div class="second-line"></div>
+    <div>É rapaiz</div>
 </button>
