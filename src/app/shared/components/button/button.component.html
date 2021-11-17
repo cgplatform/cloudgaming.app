@@ -1,0 +1,7 @@
+<button  (click)="click()">
+    <div *ngIf="!isLoading">
+        X
+        <ng-content></ng-content>
+    </div>
+    <div *ngIf="isLoading">Carregando</div>
+</button>
