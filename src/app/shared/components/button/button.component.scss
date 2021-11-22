@@ -18,8 +18,22 @@ button {
     padding: 8px 20px;
 }
 
+.portrait{
+    height: 100px;
+    width:200px;
+
+}
+
+.border{
+    border-style: dashed;
+}
+
 .blue {
     background: linear-gradient(350deg, #4e4af2 7%, #30dbe6 150%);
+}
+
+.red{
+    background: linear-gradient(350deg, #f27a4a 7%, #e69d30 150%);
 }
 
 .line {
@@ -35,4 +49,9 @@ button {
     mix-blend-mode: overlay;
     opacity: 0.3;
     border: 0.3px solid #ffffff;
+}
+
+.img{
+    height: 30px;
+    width: 40px;
 }

@@ -1,7 +1,9 @@
-<button  class="blue" (click)="click()">
+<button  [ngClass]="getClass()" (click)="click()">
     <div></div>
     <div class="content"><ng-content></ng-content></div>
     <div class="line"></div>
     <div class="second-line"></div>
-    <div>É rapaiz</div>
+    <img class="img" src="{{imgPath}}">
 </button>
+
+

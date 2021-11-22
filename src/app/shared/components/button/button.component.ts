@@ -10,6 +10,15 @@ export class ButtonComponent implements OnInit {
   @Input()
   public isLoading:boolean=false;
 
+  @Input()
+  public type: string="blue"
+
+  @Input()
+  public color: string="blue"
+
+  @Input()
+  public imgPath: string="../../../../assets/images/cards/engrenagem.png";
+
   constructor() { 
   
   }
@@ -20,6 +29,14 @@ export class ButtonComponent implements OnInit {
 
   click(){
     console.log('clicado');
+  }
+
+  getClass(){
+    let bah="";
+    if(this.type=="portrait"){
+      bah="border"
+    }
+    return [this.type,bah,this.color]
   }
 
 }
