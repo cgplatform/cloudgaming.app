@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-alert',
+  selector: 's2p-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss']
 })

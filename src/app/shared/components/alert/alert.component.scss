@@ -1,16 +1,17 @@
-.card{
-    width:150px;
+@import "../../../../assets/scss/variables.scss";
+
+.card {
+    width: 150px;
     height: 100px;
     border-radius: 8px;
-    color:#fff;
-    float:right;
-    
+    color: #fff;
+    float: right;
 }
 
-.red{
-    background:salmon;
+.red {
+    background: $button-red;
 }
 
-.brown{
+.brown {
     background: seagreen;
 }
