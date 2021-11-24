@@ -1,31 +1,34 @@
+$background-color: linear-gradient(328.39deg, #191e26 1.93%, #353f55 90.84%);
 
-$background-color: linear-gradient(328.39deg, #191E26 1.93%, #353F55 90.84%);
+$background-card: linear-gradient(323.73deg, #4e4af2 20.23%, #30dbe6 143.43%);
+
+$card-shadow: rgba(0, 0, 0, 0.263358);
 
 $button-blue: linear-gradient(350deg, #4e4af2 7%, #30dbe6 150%);
 
-$button-red: linear-gradient(330.47deg, rgba(242, 74, 74, 0.68) 7.57%, #E63030 125.28%);
+$button-red: linear-gradient(
+    330.47deg,
+    rgba(242, 74, 74, 0.68) 7.57%,
+    #e63030 125.28%
+);
 
 //Campo de Preenchimento
-$field-fill: linear-gradient(328.4deg, #191E26 -1.45%, #353F55 171.69%);
+$field-fill: linear-gradient(328.4deg, #191e26 -1.45%, #353f55 171.69%);
 
 //Campos de Identificação
-$concluded: #32D399;
+$concluded: #32d399;
 
-$open: #F3AE45;
+$open: #f3ae45;
 
-$analysis: #3899F2;
+$analysis: #3899f2;
 
 //Fontes
-$font-color-highlighted: #EAEAEA;
+$font-color-highlighted: #eaeaea;
 
-$font-color-main: #909AAD;
+$font-color-main: #909aad;
 
-$font-color-secondary: #C3C8D0;
+$font-color-secondary: #c3c8d0;
 
-$font-color-interactive: #39B3EA;
+$font-color-interactive: #39b3ea;
 
 $font-color-state: #222935;
-
-
-
-
