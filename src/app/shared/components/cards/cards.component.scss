@@ -1,10 +1,7 @@
 @import "../../../../assets/scss/variables.scss";
-
-div {
-    border-radius: 8px;
-    margin: 10px;
-    box-shadow: 0px 20px 35px $card-shadow;
-}
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
 
 .carousel {
     display: flex;
@@ -12,22 +9,49 @@ div {
     justify-content: center;
 }
 
+.backgroundImg {
+    background-image: var(--imagem);
+    box-shadow: 0px 20px 35px $card-shadow;
+    border-radius: 8px;
+    margin: 10px;
+    .text {
+        color: $font-color-highlighted;
+        position: relative;
+        top: 70%;
+        left: 8%;
+    }
+    .circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 52.36px;
+        height: 56.09px;
+        border-radius: 50%;
+        background: rgba(75, 93, 241, 0.6);
+        position: relative;
+        filter: drop-shadow(0px 20px 20px rgba(0, 0, 0, 0.300754));
+        cursor: pointer;
+        i {
+            padding: 0 10px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+    }
+}
+
 .portrait {
     width: 247.39px;
     height: 304px;
-    .img {
-        height: 100%;
-        width: 100%;
-        border-radius: 8px;
+    .circle {
+        bottom: 9.1%;
+        left: 70%;
     }
 }
 
 .landscape {
     height: 291px;
     width: 517.93px;
-    .img {
-        height: 100%;
-        width: 100%;
-        border-radius: 8px;
+    .circle {
+        top: 53%;
+        left: 85%;
     }
 }

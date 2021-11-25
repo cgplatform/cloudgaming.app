@@ -6,26 +6,30 @@ import { Component, Input, OnInit } from "@angular/core";
     styleUrls: ["./internal.component.scss"]
 })
 export class InternalComponent implements OnInit {
-    public arrayCards: string[] = [
-        "../../../../assets/images/cards/mk.png",
-        "../../../../assets/images/cards/mk.png",
-        "../../../../assets/images/cards/mk.png"
+    public arrayCards: { path: string; name: string }[] = [
+        {
+            path: "../../../../assets/images/cards/land.png",
+            name: "Mortal Kombat 11"
+        },
+        {
+            path: "../../../../assets/images/cards/mk.png",
+            name: "Mortal Kombat 11"
+        }
     ];
 
-  public loading: boolean= true;
+    public loading: boolean = true;
 
-  constructor() { }
+    constructor() {}
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {}
 
-  clickIcone(content:any){
-    console.log(content)
-    console.log('capturei o click')
-  }
+    clickIcone(content: any) {
+        console.log(content);
+        console.log("capturei o click");
+    }
 
-  clickText(content:any){
-    console.log(content)
-    console.log('capturei o click')
-  }
+    clickText(content: any) {
+        console.log(content);
+        console.log("capturei o click");
+    }
 }

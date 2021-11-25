@@ -10,9 +10,15 @@ export class CardsComponent implements OnInit {
     public type: string = "portrait";
 
     @Input()
-    public imgPaths: string[] = [
-        "../../../../assets/images/cards/engrenagem.png"
+    public imgPaths: { path: string; name: string }[] = [
+        {
+            path: "../../../../assets/images/cards/engrenagem.png",
+            name: "engrenagem"
+        }
     ];
+
+    @Input()
+    public play: string = "";
 
     constructor() {}
 

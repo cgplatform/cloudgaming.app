@@ -5,8 +5,19 @@
             #d8d8d8; ;
     "
 >
-    <app-button [isLoading]="loading" color="blue" (icone)="clickIcone($event)" (text)="clickText($event)" posfix="fas fa-arrow-right"> Alterar dados</app-button>
+    <app-button
+        [isLoading]="loading"
+        color="blue"
+        (icone)="clickIcone($event)"
+        (text)="clickText($event)"
+        posfix="fas fa-arrow-right"
+    >
+        Alterar dados</app-button
+    >
 
-
-    <app-cards type="portrait" [imgPaths]="arrayCards"></app-cards>
+    <app-cards
+        type="landscape"
+        [imgPaths]="arrayCards"
+        play="fas fa-play"
+    ></app-cards>
 </div>

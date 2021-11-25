@@ -1,5 +1,15 @@
 <div class="carousel">
-    <div *ngFor="let img of imgPaths" [ngClass]="type">
-        <img class="img" src="{{ img }}" />
+    <div
+        *ngFor="let img of imgPaths"
+        [ngClass]="type"
+        class="backgroundImg"
+        style="--imagem: url({{ img.path }}) "
+    >
+        <div class="text">
+            <p>{{ img.name }}</p>
+        </div>
+        <div class="circle">
+            <i [ngClass]="play"></i>
+        </div>
     </div>
 </div>
