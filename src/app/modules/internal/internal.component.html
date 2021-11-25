@@ -5,16 +5,11 @@
             #d8d8d8; ;
     "
 >
-    <!--<app-button
-        [isLoading]="true"
-        imgPath="../../../../assets/images/cards/btt.jpeg"
-        type="blue"
-    >
-        Alterar dados
-    </app-button>
-    <app-button [isLoading]="true" type="landscape" type="portrait" color="red">
-        Alterar dados
-    </app-button>-->
+    <app-button [isLoading]="loading" color="blue" (icone)="clickIcone($event)" (text)="clickText($event)" posfix="fas fa-arrow-right"> Alterar dados</app-button>
+
+
+
+
     <app-cards
         type="portrait"
         imgPath="../../../../assets/images/cards/mk.png"

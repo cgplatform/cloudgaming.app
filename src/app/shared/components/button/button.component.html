@@ -1,9 +1,17 @@
-<button  [ngClass]="getClass()" (click)="click()">
-    <div></div>
-    <div class="content"><ng-content></ng-content></div>
-    <div class="line"></div>
-    <div class="second-line"></div>
-    <img class="img" src="{{imgPath}}">
+<button [ngClass]="color" >
+    <div [ngClass]="{'loading': isLoading}">
+        <div class="extra-content" *ngIf="prefix">
+            <i [ngClass]="prefix"></i>
+            <div class="line"></div>
+            <div class="second-line"></div>
+        </div>
+        <div (click)="clickText()" class="content" [ngClass]="{ 'low-padding': posfix || prefix }">
+            <ng-content></ng-content>
+        </div>
+        <div class="extra-content" *ngIf="posfix">
+            <div class="line"></div>
+            <div class="second-line"></div>
+            <i (click)="clickIcone()" [ngClass]="posfix"></i>
+        </div>
+    </div>
 </button>
-
-

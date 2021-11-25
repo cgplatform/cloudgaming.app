@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InternalComponent implements OnInit {
 
+  public loading: boolean= true;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  clickIcone(content:any){
+    console.log(content)
+    console.log('capturei o click')
+  }
+
+  clickText(content:any){
+    console.log(content)
+    console.log('capturei o click')
+  }
 }

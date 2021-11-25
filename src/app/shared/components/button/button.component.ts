@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -11,32 +11,37 @@ export class ButtonComponent implements OnInit {
   public isLoading:boolean=false;
 
   @Input()
-  public type: string="blue"
+  public prefix: string=""
 
   @Input()
   public color: string="blue"
 
   @Input()
-  public imgPath: string="../../../../assets/images/cards/engrenagem.png";
+  public posfix: string=""
+
+  @Output()
+  public icone: EventEmitter<{}>;
+
+  @Output()
+  public text: EventEmitter<{}>;
 
   constructor() { 
-  
+    this.icone = new EventEmitter();
+    this.text = new EventEmitter();
   }
 
   ngOnInit(): void {
   }
 
 
-  click(){
-    console.log('clicado');
+  clickIcone(){
+    this.icone.emit("Clicou no texto");
   }
 
-  getClass(){
-    let bah="";
-    if(this.type=="portrait"){
-      bah="border"
-    }
-    return [this.type,bah,this.color]
+  
+  clickText(){
+    this.text.emit("Clicou no icone");
   }
+
 
 }
