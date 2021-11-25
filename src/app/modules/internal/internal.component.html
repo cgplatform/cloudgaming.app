@@ -8,14 +8,5 @@
     <app-button [isLoading]="loading" color="blue" (icone)="clickIcone($event)" (text)="clickText($event)" posfix="fas fa-arrow-right"> Alterar dados</app-button>
 
 
-
-
-    <app-cards
-        type="portrait"
-        imgPath="../../../../assets/images/cards/mk.png"
-    ></app-cards>
-    <app-cards
-        type="portrait"
-        imgPath="../../../../assets/images/cards/mk.png"
-    ></app-cards>
+    <app-cards type="portrait" [imgPaths]="arrayCards"></app-cards>
 </div>

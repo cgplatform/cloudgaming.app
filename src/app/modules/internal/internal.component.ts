@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-internal',
-  templateUrl: './internal.component.html',
-  styleUrls: ['./internal.component.scss']
+    selector: "app-internal",
+    templateUrl: "./internal.component.html",
+    styleUrls: ["./internal.component.scss"]
 })
 export class InternalComponent implements OnInit {
+    public arrayCards: string[] = [
+        "../../../../assets/images/cards/mk.png",
+        "../../../../assets/images/cards/mk.png",
+        "../../../../assets/images/cards/mk.png"
+    ];
 
   public loading: boolean= true;
 
