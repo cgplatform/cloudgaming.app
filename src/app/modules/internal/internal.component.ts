@@ -32,4 +32,9 @@ export class InternalComponent implements OnInit {
         console.log(content);
         console.log("capturei o click");
     }
+
+    clickPlay(content: any) {
+        console.log(content);
+        console.log("capturei o Play");
+    }
 }

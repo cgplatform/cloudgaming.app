@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
     selector: "app-cards",
@@ -20,7 +20,16 @@ export class CardsComponent implements OnInit {
     @Input()
     public play: string = "";
 
-    constructor() {}
+    @Output()
+    public iconeStart: EventEmitter<{}>;
+
+    constructor() {
+        this.iconeStart = new EventEmitter();
+    }
 
     ngOnInit(): void {}
+
+    clickPlay() {
+        this.iconeStart.emit("Clicou no Play");
+    }
 }
