@@ -5,7 +5,7 @@
             #d8d8d8; ;
     "
 >
-    <!--<app-button
+    <app-button
         [isLoading]="true"
         imgPath="../../../../assets/images/cards/btt.jpeg"
         type="blue"
@@ -14,13 +14,7 @@
     </app-button>
     <app-button [isLoading]="true" type="landscape" type="portrait" color="red">
         Alterar dados
-    </app-button>-->
-    <app-cards
-        type="portrait"
-        imgPath="../../../../assets/images/cards/mk.png"
-    ></app-cards>
-    <app-cards
-        type="portrait"
-        imgPath="../../../../assets/images/cards/mk.png"
-    ></app-cards>
+    </app-button>
+
+    <app-cards type="portrait" [imgPaths]="arrayCards"></app-cards>
 </div>

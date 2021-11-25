@@ -1,3 +1,5 @@
-<div [ngClass]="type">
-    <img class="img" src="{{ imgPath }}" />
+<div class="carousel">
+    <div *ngFor="let img of imgPaths" [ngClass]="type">
+        <img class="img" src="{{ img }}" />
+    </div>
 </div>
