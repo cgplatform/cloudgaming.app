@@ -5,6 +5,8 @@
             #d8d8d8; ;
     "
 >
+    <s2p-alert type="success">Erro de Servidor</s2p-alert>
+
     <app-button
         [isLoading]="loading"
         color="blue"
@@ -16,7 +18,7 @@
     >
 
     <app-cards
-        type="landscape"
+        type="portrait"
         [imgPaths]="arrayCards"
         (iconeStart)="clickPlay($event)"
         play="fas fa-play"
