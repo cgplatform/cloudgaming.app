@@ -10,6 +10,7 @@ on:
     
 env: 
   GCP_PROJECT_ID: "start2play"
+  DEPLOY_REGION: "us-central1"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -29,12 +30,23 @@ jobs:
 
       # Configure variables
       - name: Configure variables
-        run: |
-          echo "SERVICE_NAME=$(echo ${BRANCH_NAME}'-'${{ github.event.repository.name }})" >> $GITHUB_ENV
-          echo "SECRET_CHUNK_NAME=$(echo 'ENVIRONMENT_'${BRANCH_NAME^^})" >> $GITHUB_ENV
+        run: echo "SERVICE_NAME=$(echo ${BRANCH_NAME}'-'${{ github.event.repository.name }})" >> $GITHUB_ENV
           
       # Setup gcloud
       - uses: google-github-actions/setup-gcloud@v0.2.0
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           project_id: ${{ env.GCP_PROJECT_ID }}
+          
+      - name: Configure Docker
+        run: gcloud auth configure-docker --quiet
+        
+      - name: Build Docker image
+        run: docker build . -t "gcr.io/$GCP_PROJECT_ID/$BRANCH_NAME/$SERVICE_NAME"
+        
+      - name: Push Docker image
+        run: docker push "gcr.io/$GCP_PROJECT_ID/$BRANCH_NAME/$SERVICE_NAME"
+        
+      - name: Deploy Docker image
+        run: gcloud run deploy $SERVICE_NAME --image "gcr.io/$GCP_PROJECT_ID/$BRANCH_NAME/$SERVICE_NAME" --allow-unauthenticated --region $DEPLOY_REGION
+
