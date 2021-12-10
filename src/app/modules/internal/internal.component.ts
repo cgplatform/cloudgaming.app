@@ -17,11 +17,32 @@ export class InternalComponent implements OnInit {
         }
     ];
 
-    public loading: boolean = true;
+    private readonly modals: Map<string, any>;
 
-    constructor() {}
+    public loading: boolean = false;
 
-    ngOnInit(): void {}
+    constructor() {
+        this.modals = new Map();
+    }
+
+    ngOnInit(): void {
+
+    }
+
+    closeModal(id: string) {
+        if (!this.modals.has(id)) return;
+        this.modals.get(id).close();
+    }
+
+    openModal(id: string) {
+        if (!this.modals.has(id)) return;
+
+        this.modals.get(id).open();
+    }
+
+    modalInstance(event: any) {
+        this.modals.set(event.id, event.instance);
+    }
 
     clickIcone(content: any) {
         console.log(content);
@@ -36,5 +57,6 @@ export class InternalComponent implements OnInit {
     clickPlay(content: any) {
         console.log(content);
         console.log("capturei o Play");
+        this.openModal('Teste');
     }
 }
