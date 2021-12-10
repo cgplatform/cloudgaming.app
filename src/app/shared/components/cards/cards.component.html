@@ -8,8 +8,8 @@
         <div class="text">
             <p>{{ img.name }}</p>
         </div>
-        <div class="circle">
-            <i (click)="clickPlay()" [ngClass]="play"></i>
+        <div class="circle" (click)="clickPlay()">
+            <i [ngClass]="play"></i>
         </div>
     </div>
 </div>
