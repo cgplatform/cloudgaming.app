@@ -3,85 +3,87 @@
 @import "~@fortawesome/fontawesome-free/scss/regular.scss";
 
 button {
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    border-style: none;
-    border-radius: 5px;
-    color: #fff;
-    box-shadow: 8px 10px 18px rgba(0, 0, 0, 0.25),
-        inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-    padding: 0;
-    font-weight: 600;
-    cursor:pointer;
+  border-style: none;
+  border-radius: 5px;
+  color: #fff;
+  box-shadow: 8px 10px 18px rgba(0, 0, 0, 0.25),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+  padding: 0;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.85rem;
+  height: 2.5rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 
-
-.content{
-    padding: 8px 30px;
+.content {
+  padding: 8px 30px;
 }
 
-.low-padding{
-    padding: 8px 15px;
+.low-padding {
+  padding: 8px 15px;
 }
 
 .blue {
-    background: linear-gradient(350deg, #4e4af2 7%, #30dbe6 150%);
+  background: linear-gradient(350deg, #4e4af2 7%, #30dbe6 150%);
 }
 
-.red{
-    background: linear-gradient(330.47deg, rgba(242, 74, 74, 0.68) 7.57%, #E63030 125.28%), 
+.red {
+  background: linear-gradient(330.47deg, rgba(242, 74, 74, 0.68) 7.57%, #E63030 125.28%),
     linear-gradient(318.92deg, #6440FA -8.82%, #4323C8 100.13%, #AA1E16 100.13%)
 }
 
 
-.extra-content{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    i{
-        padding: 0 10px;
-    }
+.extra-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  i {
+    padding: 0 10px;
+  }
 }
 
 
 
 .line {
-    height: 30px;
-    mix-blend-mode: normal;
-    opacity: 0.2;
-    border: 0.5px solid #000000;
+  height: 30px;
+  mix-blend-mode: normal;
+  opacity: 0.2;
+  border: 0.5px solid #000000;
 }
 
 .second-line {
-   
-    height: 30px;
-    mix-blend-mode: overlay;
-    opacity: 0.3;
-    border: 0.3px solid #ffffff;
+
+  height: 30px;
+  mix-blend-mode: overlay;
+  opacity: 0.3;
+  border: 0.3px solid #ffffff;
 }
 
-.loading{
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    animation: load 2s;
-    animation-iteration-count: infinite;
-    border-radius: 5px;
-    background: linear-gradient(90deg, #bdbde00c 7%, #ffffffe8 150%);
-    background-repeat: no-repeat;
-    background-size: 40px;
+.loading {
+  animation: load 2s;
+  animation-iteration-count: infinite;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #bdbde00c 7%, #ffffffe8 150%);
+  background-repeat: no-repeat;
+  background-size: 40px;
+  height: 100%;
 }
 
 @keyframes load {
-    0% {
-        background-position-x: -40px;
-        
-    }
-    
-    100% {
-        background-position-x: calc(100% + 45px);
-       
-    }
+  0% {
+    background-position-x: -40px;
+  }
+
+  100% {
+    background-position-x: calc(100% + 45px);
+
+  }
 }

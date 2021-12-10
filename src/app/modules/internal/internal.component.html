@@ -4,7 +4,7 @@
             <div class="info">
                 <div class="title">Cards</div>
                 <div class="description">Componente para exibir o poster dos jogos. É possível configurar o componente
-                    em diferentes posicionamentos</div>
+                    em duas visualizações: portrait e landscape.</div>
             </div>
             <div class="content">
                 <s2p-cards type="portrait" [imgPaths]="arrayCards" (iconeStart)="clickPlay($event)" play="fas fa-play">
@@ -18,9 +18,9 @@
                 <div class="description">Componente padrão de botão. Possui eventos de click e efeito de loading.</div>
             </div>
             <div class="content">
-                <s2p-button [isLoading]="loading" color="blue" (icone)="clickIcone($event)" (text)="clickText($event)"
+                <s2p-button [isLoading]="loading" color="blue" (click)="buttonClick()" (icone)="clickIcone($event)" (text)="clickText($event)"
                     posfix="fas fa-arrow-right">
-                    Alterar dados</s2p-button>
+                    Clique em mim</s2p-button>
             </div>
         </div>
         
@@ -35,5 +35,8 @@
                 <s2p-input [field]="textareaField" [control]="textareaControl"></s2p-input>
             </div>
         </div>
+
+        <!-- <s2p-modal id="Teste" (controller)="modalInstance($event)"></s2p-modal> -->
+
     </div>
 </div>

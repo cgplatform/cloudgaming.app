@@ -19,15 +19,36 @@ export class InternalComponent implements OnInit {
         }
     ];
 
-    public loading: boolean = true;
+    private readonly modals: Map<string, any>;
 
     public emailControl = new FormControl("", [Validators.required, Validators.email]);
     public selectControl = new FormControl("");
     public textareaControl = new FormControl("");
 
-    constructor() {}
+    public loading: boolean = false;
 
-    ngOnInit(): void {}
+    constructor() {
+        this.modals = new Map();
+    }
+
+    ngOnInit(): void {
+
+    }
+
+    closeModal(id: string) {
+        if (!this.modals.has(id)) return;
+        this.modals.get(id).close();
+    }
+
+    openModal(id: string) {
+        if (!this.modals.has(id)) return;
+
+        this.modals.get(id).open();
+    }
+
+    modalInstance(event: any) {
+        this.modals.set(event.id, event.instance);
+    }
 
     public get emailField(): Field {
         return {
@@ -69,6 +90,10 @@ export class InternalComponent implements OnInit {
         };
     }
 
+    buttonClick() {
+        this.loading = !this.loading;
+    }
+
     clickIcone(content: any) {
         console.log(content);
         console.log("capturei o click");
@@ -82,5 +107,6 @@ export class InternalComponent implements OnInit {
     clickPlay(content: any) {
         console.log(content);
         console.log("capturei o Play");
+        this.openModal('Teste');
     }
 }
