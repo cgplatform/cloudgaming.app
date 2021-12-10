@@ -2,9 +2,6 @@ FROM node:14.17.0 as s2p-front
 
 WORKDIR /app
 
-ENV PORT 8080
-ENV HOST 0.0.0.0
-
 COPY . ./
 
 RUN npm install

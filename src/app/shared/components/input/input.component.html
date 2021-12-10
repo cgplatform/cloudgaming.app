@@ -1,1 +1,54 @@
-<p>input works!</p>
+<div *ngIf="control" class="component-wrapper">
+    <label *ngIf="field.label" class="form-label" [ngClass]="{'required': required}">
+        {{ field.label }}
+        <a *ngIf="field.labelLink" [routerLink]="field.labelLink.url">{{ field.labelLink.text }}</a>
+    </label>
+
+    <div class="input-wrapper" [ngSwitch]="field.type">
+        <div (click)="onClick($event)" *ngSwitchDefault class="input-group" [ngClass]="wrapperClasses">
+            <div *ngIf="prefix" class="suffix">
+                <ng-container *ngIf="prefix.icon; else elseif">
+                    <i [ngClass]="prefix.class"></i>
+                </ng-container>
+
+                <ng-template #elseif>
+                    {{ prefix }}
+                </ng-template>
+            </div>
+
+            <input [type]="field.type" [formControl]="control" [placeholder]="placeholder"
+                [dropSpecialCharacters]="canDrop" [mask]="mask">
+
+            <div *ngIf="postfix" class="suffix">
+                <ng-container *ngIf="postfix.icon; else elseif">
+                    <i [ngClass]="postfix.class"></i>
+                </ng-container>
+
+                <ng-template #elseif>
+                    {{ postfix }}
+                </ng-template>
+            </div>
+        </div>
+
+        <textarea *ngSwitchCase="'textarea'" class="primary" [placeholder]="placeholder"
+            [formControl]="control"></textarea>
+
+        <div *ngSwitchCase="'select'" class="select-wrapper" [ngClass]="wrapperClasses">
+            <select class="primary" [ngClass]="selectClasses" [formControl]="control">
+                <option value="" disabled selected>{{ field.placeholder }}</option>
+                <option *ngFor="let option of field.options" [value]="option.key">
+                    {{ option.value }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div *ngIf="control.invalid && control.touched">
+        <div class="form-message-wrapper">
+            <span class="required">
+                <ng-container *ngFor="let error of field.errors | keyvalue">
+                    {{ control.hasError(error.key) ? error.value : "" }}
+                </ng-container>
+            </span>
+        </div>
+    </div>
+</div>

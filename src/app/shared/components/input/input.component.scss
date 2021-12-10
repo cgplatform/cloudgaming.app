@@ -1,0 +1,316 @@
+// Input
+// Custom CSS Styles for Form Inputs
+
+@use "sass:math";
+
+@import "../../../../assets/scss/variables.scss";
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+
+
+$border-focus-color: #4e4af2;
+$error-color: #FC6363;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.component-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  &>*:nth-child(n + 2) {
+    margin-top: 0.5rem;
+  }
+}
+
+.disabled {
+  opacity: 0.8 !important;
+  cursor: not-allowed !important;
+}
+
+input,
+select,
+.select-wrapper,
+.input-group {
+
+  &:disabled,
+  &.disabled {
+    @extend .disabled;
+  }
+}
+
+select,
+textarea,
+input {
+  letter-spacing: 0.05rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  outline: none;
+  box-shadow: none;
+  padding: 0;
+  color: $font-color-main;
+}
+
+select {
+  text-overflow: "";
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+$input-background: #fafafa;
+$input-vertical-padding: 0.9rem;
+$input-horizontal-padding: 1.28647rem;
+
+input:focus,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px #feecec00 inset !important;
+  -webkit-box-shadow: 0 0 0 30px #feecec00 inset !important;
+  background-clip: content-box !important;
+}
+
+.default {
+  font-size: 0.94rem;
+
+  border-radius: 10px;
+
+  color: $font-color-main;
+
+  transition: all .3s ease;
+
+  background: linear-gradient(356deg, #191E26 0%, #353F55 171.69%);
+  box-shadow: rgb(0 0 0 / 25%) 0px 54px 55px, rgb(0 0 0 / 12%) 0px -12px 30px, rgb(0 0 0 / 12%) 0px 4px 6px, rgb(0 0 0 / 17%) 0px 12px 13px, rgb(0 0 0 / 9%) 0px -3px 5px;
+  ;
+
+  border: 2px solid #8791a345;
+}
+
+.input {
+  width: 100%;
+  padding: $input-vertical-padding $input-horizontal-padding;
+
+  @extend .default;
+
+  &.disabled {
+    @extend .disabled;
+  }
+}
+
+.placeholder {
+  font-size: 0.9rem;
+  color: $font-color-main;
+}
+
+textarea {
+  width: calc(100% - 2 * 1.28647rem);
+  padding: 0.88647rem 1.28647rem;
+
+  overflow: hidden;
+
+  line-height: 1.5rem;
+  resize: none;
+
+
+  &::placeholder {
+    font-size: 0.9rem;
+    color: $font-color-main;
+  }
+
+  &:focus {
+    border-color: $border-focus-color;
+
+    &:focus::placeholder {
+      color: transparent;
+    }
+  }
+
+  &.ng-invalid.ng-touched {
+    background: linear-gradient(356deg, #191E26 0%, #353F55 171.69%);
+    border-color: $error-color;
+  }
+
+  @extend .default;
+}
+
+select {
+  @extend .input;
+
+  cursor: pointer;
+
+  &:disabled,
+  &.disabled {
+    @extend .disabled;
+  }
+
+  &.default-value {
+    @extend .placeholder;
+  }
+
+  &.ng-invalid.ng-touched {
+
+    &,
+    & select,
+    & select.default-value {
+      color: $error-color;
+    }
+
+    background-color: #feecec !important;
+    animation: shake 0.5s ease-in-out;
+
+    border-color: $error-color;
+  }
+}
+
+.select-wrapper {
+  display: grid;
+
+  position: relative;
+
+  width: 100%;
+  height: auto;
+
+  grid-gap: 0.5rem;
+  align-items: center;
+  align-content: center;
+
+  &.ng-invalid.ng-touched {
+    &:after {
+      color: $error-color;
+    }
+  }
+
+  &:after {
+    position: absolute;
+
+    right: 1.28647rem;
+
+    @extend .fas;
+    @extend .fa-chevron-down;
+    font-size: 1rem;
+
+    pointer-events: none;
+
+    content: fa-content($fa-var-chevron-down);
+
+    color: $font-color-main;
+  }
+}
+
+.input-group {
+  @extend .input;
+
+  display: flex;
+  flex-direction: row;
+
+  cursor: text;
+
+  & .suffix {
+    font-weight: 600;
+  }
+
+  & :nth-child(n + 2) {
+    margin-left: 0.8rem;
+  }
+
+  & input {
+    border: 0;
+    background: transparent;
+
+    font-size: inherit;
+
+    width: 100%;
+    height: 100%;
+
+    &::placeholder {
+      @extend .placeholder;
+    }
+
+    cursor:text;
+  }
+
+  &:focus-within {
+    background: linear-gradient(328.4deg, #191E26 -1.45%, #353F55 171.69%), #D8D8D8;
+    border-color: #06c;
+
+    & input::placeholder {
+      color: transparent;
+    }
+  }
+
+  &.ng-invalid.ng-touched {
+
+    & input {
+
+      &:focus,
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        box-shadow: 0 0 0 30px #feecec00 inset !important;
+        -webkit-box-shadow: 0 0 0 30px #feecec00 inset !important;
+      }
+    }
+
+    &,
+    & input,
+    & input::placeholder {
+      color: $error-color;
+    }
+
+    background: linear-gradient(328.4deg, #191E26 -1.45%, #353F55 171.69%),
+    #D8D8D8 !important;
+    animation: shake 0.5s ease-in-out;
+
+    border-color: $error-color;
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  position: relative;
+}
+
+.required {
+  float: left;
+  font-size: 0.8rem;
+}
+
+.form-message-wrapper {
+  display: flex;
+  color: $error-color;
+}
+
+.form-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  padding: 0;
+
+  &.required::before {
+    content: "*";
+    color: #ef1126;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  & a {
+    float: right;
+    font-size: 0.85rem;
+    font-weight: 400;
+    text-decoration: none;
+    color: $border-focus-color;
+  }
+}
