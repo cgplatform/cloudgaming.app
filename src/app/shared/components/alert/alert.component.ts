@@ -1,27 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: 's2p-alert',
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss']
+    selector: "s2p-alert",
+    templateUrl: "./alert.component.html",
+    styleUrls: ["./alert.component.scss"]
 })
 export class AlertComponent implements OnInit {
+    @Input()
+    public information: string = "";
 
-  @Input()
-  public title:string= "";
+    @Input()
+    public type: string = "success";
 
-  @Input()
-  public type: string="alerta"
+    public close: boolean = true;
 
-  
+    constructor() {}
 
-  constructor() { }
+    ngOnInit(): void {
+        setTimeout(() => (this.close = false), 5000);
+    }
 
-  ngOnInit(): void {
-  }
-
-  getClass(){
-    
-  }
-
+    closeAlert() {
+        this.close = false;
+    }
 }

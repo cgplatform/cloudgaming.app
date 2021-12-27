@@ -1,0 +1,147 @@
+.modal-overlay {
+  background: #00000038;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 99999;
+  overflow: hidden;
+
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+
+  &:not(.opening):not(.open):not(.closing) {
+    display: none;
+  }
+
+  &.open {
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  &.closing > .modal-wrapper {
+    transform: translateY(100%);
+    animation: 0.5s ease-in-out close-top;
+  }
+
+  &.opening > .modal-wrapper {
+    animation: 0.5s ease-in-out open-top;
+  }
+
+  & .modal-wrapper {
+    padding: 3rem;
+    overflow: hidden;
+    width: 800px;
+    height: 80%;
+
+    border-radius: 10px;
+
+    & .body {
+      display: flex;
+      grid-gap: 1.5rem;
+      flex-direction: column;
+
+      height: 100%;
+
+      line-height: 1.2rem;
+      & .content {
+        width: 100%;
+        height: 100%;
+        padding-top: 0.5rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar {
+          width: 0;
+          display: none;
+          background: transparent;
+        }
+      }
+    }
+  }
+}
+
+.modal-wrapper {
+  background-color: #191E26;
+  box-shadow: 3px 3px 10px rgba(78, 74, 242, 0.75), 50px 50px 4px rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+  z-index: 10000;
+}
+
+@keyframes close-top {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes open-top {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.close {
+  position: relative;
+
+  cursor: pointer;
+
+  width: 1.4rem;
+  height: 1.4rem;
+
+  &:after,
+  &:before {
+    position: absolute;
+    left: 0.7rem;
+    content: " ";
+
+    width: 2px;
+    height: 1.4rem;
+
+    background-color: #333;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+}
+
+@media (max-width: 860px) {
+  .modal-overlay {
+    &.modal-wrapper {
+      width: 100% !important;
+      height: 100% !important;
+      max-height: 100% !important;
+
+      padding: 3rem 3rem 0 3rem;
+      border-radius: 0;
+    }
+  }
+}
+

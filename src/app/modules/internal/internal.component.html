@@ -1,12 +1,42 @@
-<div
-    style="
-        height: 500px;
-        background: linear-gradient(328.39deg, #191e26 1.93%, #353f55 90.84%),
-            #d8d8d8; ;
-    "
->
-    <app-button [isLoading]="loading" color="blue" (icone)="clickIcone($event)" (text)="clickText($event)" posfix="fas fa-arrow-right"> Alterar dados</app-button>
+<div id="components-page">
+    <div class="container">
+        <div class="component-area">
+            <div class="info">
+                <div class="title">Cards</div>
+                <div class="description">Componente para exibir o poster dos jogos. É possível configurar o componente
+                    em duas visualizações: portrait e landscape.</div>
+            </div>
+            <div class="content">
+                <s2p-cards type="portrait" [imgPaths]="arrayCards" (iconeStart)="clickPlay($event)" play="fas fa-play">
+                </s2p-cards>
+            </div>
+        </div>
 
+        <div class="component-area">
+            <div class="info">
+                <div class="title">Botões</div>
+                <div class="description">Componente padrão de botão. Possui eventos de click e efeito de loading.</div>
+            </div>
+            <div class="content">
+                <s2p-button [isLoading]="loading" color="blue" (click)="buttonClick()" (icone)="clickIcone($event)" (text)="clickText($event)"
+                    posfix="fas fa-arrow-right">
+                    Clique em mim</s2p-button>
+            </div>
+        </div>
+        
+        <div class="component-area">
+            <div class="info">
+                <div class="title">Inputs</div>
+                <div class="description">Componente padrão de input. Pode ser configurado na forma de um select, input e textarea. Oferece suporte ao FormControl.</div>
+            </div>
+            <div class="content buttons">
+                <s2p-input [field]="emailField" [control]="emailControl"></s2p-input>
+                <s2p-input [field]="selectField" [control]="selectControl"></s2p-input>
+                <s2p-input [field]="textareaField" [control]="textareaControl"></s2p-input>
+            </div>
+        </div>
 
-    <app-cards type="portrait" [imgPaths]="arrayCards"></app-cards>
+        <!-- <s2p-modal id="Teste" (controller)="modalInstance($event)"></s2p-modal> -->
+
+    </div>
 </div>
