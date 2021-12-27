@@ -1,0 +1,42 @@
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+@import "../../../../assets/scss/variables.scss";
+
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+}
+
+h1{
+    color: $font-color-main;
+}
+
+.user-info-container{
+    margin-top: 2rem;
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1rem;
+    grid-template-areas: "first-name second-name" "email email" "phone phone" "update cancel";
+}
+
+.first-name{
+    grid-area: first-name;
+}
+.second-name{
+    grid-area: second-name;
+}
+.email{
+    grid-area: email
+}
+.phone{
+    grid-area: phone;
+}
+.update{
+    grid-area: update;
+}
+.cancel{
+    grid-area: cancel;
+}
