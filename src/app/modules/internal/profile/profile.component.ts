@@ -14,6 +14,10 @@ export class ProfileComponent implements OnInit {
   public isEditing: boolean= false;
   public isLoading: boolean= false;
 
+  public updateButtonText: string= "Alterar dados";
+  public cancelButtonText: string= "Desativar Usuário";
+
+
   constructor() { 
 
     this.profileForm= new FormGroup({});
@@ -21,6 +25,9 @@ export class ProfileComponent implements OnInit {
     this.profileForm.addControl("secondName", new FormControl("Pimentel",[Validators.required]));
     this.profileForm.addControl("email", new FormControl("guaxininanonimo@gmail.com",[Validators.required, Validators.email]));
     this.profileForm.addControl("phone", new FormControl("(31)99999-9999",[Validators.required]));
+    this.profileForm.addControl("birthDay", new FormControl("11",[Validators.required]));
+    this.profileForm.addControl("birthMonth", new FormControl("01",[Validators.required]));
+    this.profileForm.addControl("birthYear", new FormControl("2001",[Validators.required]));
     this.profileForm.disable();
 
   }
@@ -58,19 +65,49 @@ export class ProfileComponent implements OnInit {
       errors: {
         "required": "O campo é obrigatório"
       }
+    },
+    {
+      type: "number",
+      label: "Dia",
+      errors: {
+        "required": "Obrigatório"
+      }
+    },
+    {
+      type: "number",
+      label: "Mês",
+      errors: {
+        "required": "Obrigatório"
+      }
+    },
+    {
+      type: "number",
+      label: "Ano",
+      errors: {
+        "required": "Obrigatório"
+      }
     }
     ]
   }
 
   public update(){
-    
-    this.isEditing=true;
-    this.profileForm.enable();
+    if(this.profileForm.disabled){
+      this.profileForm.enable();
+      this.updateButtonText="Salvar Alterações";
+      this.cancelButtonText="Cancelar";
+    }else{
+
+    }
   }
 
   public cancel(){
-    this.isEditing=false;
-    this.profileForm.disable();
+    if(this.profileForm.disabled){
+   
+    }else{
+      this.profileForm.disable();
+      this.updateButtonText="Alterar dados";
+      this.cancelButtonText="Desativar Usuário";
+    }
   }
 
   //Methods to use only in tha HTML

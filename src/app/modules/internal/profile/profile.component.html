@@ -6,10 +6,15 @@
             <s2p-input class="second-name" [field]="profileFormFields[1]" [control]="getFormControl('secondName')"></s2p-input>
             <s2p-input class="email" [field]="profileFormFields[2]" [control]="getFormControl('email')"></s2p-input>
             <s2p-input class="phone" [field]="profileFormFields[3]" [control]="getFormControl('phone')"></s2p-input>
+            <div class="birth-date-container">
+                <s2p-input [field]="profileFormFields[4]" [control]="getFormControl('birthDay')"></s2p-input>
+                <s2p-input [field]="profileFormFields[5]" [control]="getFormControl('birthMonth')"></s2p-input>
+                <s2p-input [field]="profileFormFields[6]" [control]="getFormControl('birthYear')"></s2p-input>
+            </div>
             <s2p-button [isLoading]="isLoading" color="update blue" (click)="update()">
-                    Alterar dados</s2p-button>
+                {{updateButtonText}}</s2p-button>
             <s2p-button  color="cancel red" (click)="cancel()">
-                Desativar Usuário</s2p-button>
+                {{cancelButtonText}}</s2p-button>
         </div>
     </div>
     <div>
