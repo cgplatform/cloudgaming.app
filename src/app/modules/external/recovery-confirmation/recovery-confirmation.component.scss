@@ -1,0 +1,82 @@
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+
+@import "../../../../assets/scss/variables.scss";
+
+.alert {
+    margin-bottom: 30px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 0.7fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+h1 {
+    color: $font-color-main;
+}
+
+.check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .elipse {
+        background-color: $concluded;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .mail {
+            color: $font-color-highlighted;
+            font-size: 30px;
+            padding-left: 2px;
+        }
+    }
+}
+
+.access-container {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.3rem;
+    grid-template-areas: " info" "link";
+}
+
+.info {
+    grid-area: info;
+}
+
+.link {
+    grid-area: link;
+}
+
+/*Link não visitado */
+a:link {
+    color: $font-color-interactive;
+    text-decoration: none;
+}
+
+/*Link já visitado*/
+a:visited {
+    color: $font-color-interactive;
+    text-decoration: none;
+}
+
+/*Quando o mouse passa por cima*/
+a:hover {
+    color: $font-color-highlighted;
+    text-decoration: none;
+}
+
+/*Link ativo/selecionado*/
+a:active {
+    color: $font-color-main;
+    text-decoration: none;
+}
