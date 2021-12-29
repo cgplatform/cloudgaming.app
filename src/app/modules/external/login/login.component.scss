@@ -1,0 +1,70 @@
+@import "../../../../assets/scss/variables.scss";
+
+.alert {
+    margin-bottom: 30px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 0.7fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+h1 {
+    color: $font-color-main;
+}
+
+.access-container {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 0.4fr;
+    gap: 1.3rem;
+    grid-template-areas: "email email" "password password" "login auto" "createConta createConta";
+}
+
+.email {
+    grid-area: email;
+}
+.password {
+    grid-area: password;
+}
+.log-in {
+    grid-area: login;
+}
+
+.createConta {
+    grid-area: createConta;
+}
+
+.createConta {
+    font-family: "Inter", sans-serif;
+    letter-spacing: 0rem;
+}
+
+a {
+    letter-spacing: 0rem;
+}
+
+/*Link não visitado */
+a:link {
+    text-decoration: none;
+}
+
+/*Link já visitado*/
+a:visited {
+    color: $font-color-interactive;
+    text-decoration: none;
+}
+
+/*Quando o mouse passa por cima*/
+a:hover {
+    color: $font-color-highlighted;
+    text-decoration: none;
+}
+
+/*Link ativo/selecionado*/
+a:active {
+    color: $font-color-main;
+    text-decoration: none;
+}
