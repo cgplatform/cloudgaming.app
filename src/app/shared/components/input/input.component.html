@@ -1,11 +1,22 @@
 <div *ngIf="control" class="component-wrapper">
-    <label *ngIf="field.label" class="form-label" [ngClass]="{'required': required && !control.disabled}">
+    <label
+        *ngIf="field.label || field.labelLink"
+        class="form-label"
+        [ngClass]="{ required: required && !control.disabled && field.label }"
+    >
         {{ field.label }}
-        <a *ngIf="field.labelLink" [routerLink]="field.labelLink.url">{{ field.labelLink.text }}</a>
+        <a *ngIf="field.labelLink" [routerLink]="field.labelLink.url">{{
+            field.labelLink.text
+        }}</a>
     </label>
 
     <div class="input-wrapper" [ngSwitch]="field.type">
-        <div (click)="onClick($event)" *ngSwitchDefault class="input-group" [ngClass]="wrapperClasses">
+        <div
+            (click)="onClick($event)"
+            *ngSwitchDefault
+            class="input-group"
+            [ngClass]="wrapperClasses"
+        >
             <div *ngIf="prefix" class="suffix">
                 <ng-container *ngIf="prefix.icon; else elseif">
                     <i [ngClass]="prefix.class"></i>
@@ -16,8 +27,13 @@
                 </ng-template>
             </div>
 
-            <input [type]="field.type" [formControl]="control" [placeholder]="placeholder"
-                [dropSpecialCharacters]="canDrop" [mask]="mask">
+            <input
+                [type]="field.type"
+                [formControl]="control"
+                [placeholder]="placeholder"
+                [dropSpecialCharacters]="canDrop"
+                [mask]="mask"
+            />
 
             <div *ngIf="postfix" class="suffix">
                 <ng-container *ngIf="postfix.icon; else elseif">
@@ -30,13 +46,30 @@
             </div>
         </div>
 
-        <textarea *ngSwitchCase="'textarea'" class="primary" [placeholder]="placeholder"
-            [formControl]="control"></textarea>
+        <textarea
+            *ngSwitchCase="'textarea'"
+            class="primary"
+            [placeholder]="placeholder"
+            [formControl]="control"
+        ></textarea>
 
-        <div *ngSwitchCase="'select'" class="select-wrapper" [ngClass]="wrapperClasses">
-            <select class="primary" [ngClass]="selectClasses" [formControl]="control">
-                <option value="" disabled selected>{{ field.placeholder }}</option>
-                <option *ngFor="let option of field.options" [value]="option.key">
+        <div
+            *ngSwitchCase="'select'"
+            class="select-wrapper"
+            [ngClass]="wrapperClasses"
+        >
+            <select
+                class="primary"
+                [ngClass]="selectClasses"
+                [formControl]="control"
+            >
+                <option value="" disabled selected>
+                    {{ field.placeholder }}
+                </option>
+                <option
+                    *ngFor="let option of field.options"
+                    [value]="option.key"
+                >
                     {{ option.value }}
                 </option>
             </select>
