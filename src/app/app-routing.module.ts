@@ -3,14 +3,14 @@ import { RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
     {
-        path: "external",
+        path: "",
         loadChildren: () =>
             import("./modules/external/external.module").then(
                 (m) => m.ExternalModule
             )
     },
     {
-        path: "internal",
+        path: "",
         loadChildren: () =>
             import("./modules/internal/internal.module").then(
                 (m) => m.InternalModule

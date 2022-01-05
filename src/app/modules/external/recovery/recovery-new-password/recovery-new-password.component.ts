@@ -5,7 +5,7 @@ import {
     FormGroup,
     Validators
 } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Field } from "src/app/shared/components/input/models/field.model";
 
 @Component({
@@ -20,7 +20,12 @@ export class RecoveryNewPasswordComponent implements OnInit {
 
     public loading: boolean = false;
 
-    constructor(private router: Router) {
+    private params: any;
+
+    constructor(
+        private router: Router,
+        private activadedRoute: ActivatedRoute
+    ) {
         this.loginForm = new FormGroup({});
         this.loginForm.addControl(
             "passwordControl",
@@ -41,7 +46,12 @@ export class RecoveryNewPasswordComponent implements OnInit {
             });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.activadedRoute.params.subscribe((params) => {
+            this.params = params;
+        });
+        console.log(this.params.token);
+    }
 
     public get profileFormFields(): Field[] {
         return [
@@ -71,7 +81,7 @@ export class RecoveryNewPasswordComponent implements OnInit {
         if (this.loginForm.valid) {
             this.loading = !this.loading;
             //TODO mudar rota para rota da tela de entrada 2
-            this.router.navigate(["/internal/profile"]);
+            this.router.navigate(["/profile"]);
         } else this.close = !this.close;
     }
 

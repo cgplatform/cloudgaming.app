@@ -44,7 +44,7 @@ export class RecoveryEmailComponent implements OnInit {
     buttonClick() {
         if (this.loginForm.valid) {
             this.loading = !this.loading;
-            this.router.navigate(["/external/recovery-confirmation"]);
+            this.router.navigate(["/recovery/confirmation"]);
         } else this.close = !this.close;
     }
 }

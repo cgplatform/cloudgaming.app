@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
                 placeholder: "Digite sua senha",
                 labelLink: {
                     text: "Esqueceu sua senha?",
-                    url: "/external/recovery-email"
+                    url: "/recovery/email"
                 },
                 errors: {
                     required: "O campo é obrigatório"
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.valid) {
             this.loading = !this.loading;
             //TODO mudar rota para rota da tela de entrada 2
-            this.router.navigate(["/internal/profile"]);
+            this.router.navigate(["/profile"]);
         } else {
             this.close = !this.close;
         }

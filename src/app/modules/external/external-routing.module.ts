@@ -16,27 +16,9 @@ const routes: Routes = [
         component: ExternalComponent
     },
     {
-        path: "recovery-email",
+        path: "recovery",
         loadChildren: () =>
-            import("./recovery-email/recovery-email.module").then(
-                (m) => m.RecoveryEmailModule
-            ),
-        component: ExternalComponent
-    },
-    {
-        path: "recovery-confirmation",
-        loadChildren: () =>
-            import("./recovery-confirmation/recovery-confirmation.module").then(
-                (m) => m.RecoveryConfirmationModule
-            ),
-        component: ExternalComponent
-    },
-    {
-        path: "recovery-new-password",
-        loadChildren: () =>
-            import("./recovery-new-password/recovery-new-password.module").then(
-                (m) => m.RecoveryNewPasswordModule
-            ),
+            import("./recovery/recovery.module").then((m) => m.RecoveryModule),
         component: ExternalComponent
     }
 ];
