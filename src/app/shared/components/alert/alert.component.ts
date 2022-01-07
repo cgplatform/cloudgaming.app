@@ -17,7 +17,7 @@ export class AlertComponent implements OnInit {
 
     public message: string;
 
-    public show: boolean = true;
+    public show: boolean = false;
 
     constructor() {
         this.message="";
