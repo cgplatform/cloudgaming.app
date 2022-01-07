@@ -21,7 +21,6 @@ export class HttpInterceptorService implements HttpInterceptor {
         request: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-        console.log("INTERCEPTOR");
 
         try {
             const user = this.sessionService.get();
@@ -44,10 +43,11 @@ export class HttpInterceptorService implements HttpInterceptor {
                 }),
                 catchError((fail: any) => {
                     if (fail.status === 401) {
+
                         this.sessionService.destroy();
                     }
-
                     return throwError(fail);
+                    
                 })
             );
         }
