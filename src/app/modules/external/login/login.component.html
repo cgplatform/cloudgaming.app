@@ -1,8 +1,6 @@
-<div class="alert">
-    <s2p-alert *ngIf="close" type="warning"
-        >"Necessário preencher os campos!"</s2p-alert
+<s2p-alert (controller)="alertEvent($event)"></s2p-alert
     >
-</div>
+
 
 <div class="container">
     <div>
