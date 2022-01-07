@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { User } from "src/app/core/models/user.model";
+import { SessionService } from "src/app/core/services/session.service";
 
 @Component({
     selector: "app-internal",
@@ -9,12 +10,13 @@ import { User } from "src/app/core/models/user.model";
 })
 export class InternalComponent implements OnInit {
     
-    public user: User | undefined;
+    public user: User;
 
     constructor(
-        private router: Router
+        private router: Router,
+        private _sessionService: SessionService
     ) {
-      
+      this.user = this._sessionService.get();
     }
 
     ngOnInit(): void {

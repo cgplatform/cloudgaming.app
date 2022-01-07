@@ -1,17 +1,18 @@
+<s2p-alert (controller)="alertEvent($event)"></s2p-alert
+>
 <div class="container">
     <div>
         <h3>DETALHES DO USUÁRIO</h3>
         <div class="user-info-container">
-            <s2p-input class="first-name" [field]="profileFormFields[0]" [control]="getFormControl('firstName')"></s2p-input>
-            <s2p-input class="second-name" [field]="profileFormFields[1]" [control]="getFormControl('secondName')"></s2p-input>
-            <s2p-input class="email" [field]="profileFormFields[2]" [control]="getFormControl('email')"></s2p-input>
-            <s2p-input class="phone" [field]="profileFormFields[3]" [control]="getFormControl('phone')"></s2p-input>
+            <s2p-input class="name" [field]="profileFormFields[0]" [control]="getFormControl('name')"></s2p-input>
+            <s2p-input class="email" [field]="profileFormFields[1]" [control]="getFormControl('email')"></s2p-input>
+            <s2p-input class="phone" [field]="profileFormFields[2]" [control]="getFormControl('phone')"></s2p-input>
             <div class="birth-date-container">
-                <s2p-input [field]="profileFormFields[4]" [control]="getFormControl('birthDay')"></s2p-input>
-                <s2p-input [field]="profileFormFields[5]" [control]="getFormControl('birthMonth')"></s2p-input>
-                <s2p-input [field]="profileFormFields[6]" [control]="getFormControl('birthYear')"></s2p-input>
+                <s2p-input [field]="profileFormFields[3]" [control]="getFormControl('birthDay')"></s2p-input>
+                <s2p-input [field]="profileFormFields[4]" [control]="getFormControl('birthMonth')"></s2p-input>
+                <s2p-input [field]="profileFormFields[5]" [control]="getFormControl('birthYear')"></s2p-input>
             </div>
-            <s2p-button [isLoading]="isLoading" color="update blue" (click)="update()">
+            <s2p-button [isLoading]="isLoading.update" color="update blue" (click)="update()">
                 {{updateButtonText}}</s2p-button>
             <s2p-button  color="cancel red" (click)="cancel()">
                 {{cancelButtonText}}</s2p-button>
@@ -21,3 +22,9 @@
         <img src="../../../../assets/images/characters/Killjoy.png" width= "350px" height="550px">
     </div>
 </div>
+
+<s2p-modal id="modalPassword" (controller)="modalEvent($event)">
+
+    <s2p-input [field]="profileFormFields[6]" [control]="passwordControl"></s2p-input>
+    <s2p-button [isLoading]="isLoading.delete" color="red" (click)="removeUser()">Apagar usuário</s2p-button>
+</s2p-modal>
