@@ -81,26 +81,30 @@ export class ProfileComponent implements OnInit {
             {
                 type: "text",
                 label: "Telefone",
+                mask: "(00) 0 0000-0000",
                 errors: {
                     required: "O campo é obrigatório"
                 }
             },
             {
-                type: "number",
+                type: "text",
+                mask: "00",
                 label: "Dia",
                 errors: {
                     required: "Obrigatório"
                 }
             },
             {
-                type: "number",
+                type: "text",
+                mask: "00",
                 label: "Mês",
                 errors: {
                     required: "Obrigatório"
                 }
             },
             {
-                type: "number",
+                type: "text",
+                mask: "0000",
                 label: "Ano",
                 errors: {
                     required: "Obrigatório"
