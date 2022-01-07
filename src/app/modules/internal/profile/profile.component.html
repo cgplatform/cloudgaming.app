@@ -24,7 +24,9 @@
 </div>
 
 <s2p-modal id="modalPassword" (controller)="modalEvent($event)">
-
-    <s2p-input [field]="profileFormFields[6]" [control]="passwordControl"></s2p-input>
-    <s2p-button [isLoading]="isLoading.delete" color="red" (click)="removeUser()">Apagar usuário</s2p-button>
+    <div class="passwordModal">
+        <s2p-input [field]="profileFormFields[6]" [control]="passwordControl"></s2p-input>
+        <s2p-button [isLoading]="isLoading.delete" color="red" (click)="removeUser()">Apagar usuário</s2p-button>
+    </div>
+   
 </s2p-modal>

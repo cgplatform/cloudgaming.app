@@ -1,6 +1,9 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { SessionService } from "src/app/core/services/session.service";
+import { UserQueryService } from "src/app/core/services/user/query.services";
 import { Field } from "src/app/shared/components/input/models/field.model";
 
 @Component({
@@ -15,7 +18,11 @@ export class LoginComponent implements OnInit {
 
     public loading: boolean = false;
 
-    constructor(private router: Router) {
+    constructor(
+            private router: Router,
+            private _userQueryService: UserQueryService,
+            private _sessionService: SessionService
+        ) {
         this.loginForm = new FormGroup({});
         this.loginForm.addControl(
             "emailControl",
@@ -57,13 +64,19 @@ export class LoginComponent implements OnInit {
         return this.loginForm.get(field) as FormControl;
     }
 
-    buttonClick() {
+    loggIn() {
         if (this.loginForm.valid) {
-            this.loading = !this.loading;
-            //TODO mudar rota para rota da tela de entrada 2
-            this.router.navigate(["/profile"]);
+            this.loading =true;
+            const value = this.loginForm.value
+            this._userQueryService.login(value.email, value.password).subscribe((result:any)=>{
+                const token = result.data.token;
+            },(fail:HttpErrorResponse)=>{
+
+            })
         } else {
             this.close = !this.close;
         }
     }
+
+
 }

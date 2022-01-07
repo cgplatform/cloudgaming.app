@@ -8,7 +8,6 @@ import { UserMutationService } from "src/app/core/services/user/mutation.service
 import { AlertComponent } from "src/app/shared/components/alert/alert.component";
 import { Field } from "src/app/shared/components/input/models/field.model";
 import { ModalController } from "src/app/shared/components/modal/models/modal-controller.model";
-import { EventEmitter } from "stream";
 
 @Component({
     selector: "app-profile",
@@ -28,7 +27,12 @@ export class ProfileComponent extends ModalController implements OnInit {
     public updateButtonText: string = "Alterar dados";
     public cancelButtonText: string = "Desativar Usuário";
 
-    public userSession: User;
+    public userSession={
+        name: "Luiz",
+        birthdate: "11/01/2001",
+        email:"bah",
+        phone: "31989293599"
+    };
 
     public passwordControl: FormControl;
 
@@ -36,11 +40,11 @@ export class ProfileComponent extends ModalController implements OnInit {
 
     constructor(
         private router: Router,
-        private _sessionService: SessionService,
+       
         private _userMutationService: UserMutationService
     ) {
         super();
-        this.userSession = _sessionService.get();
+      
         this.profileForm = new FormGroup({});
         this.passwordControl = new FormControl('',[Validators.required]);
 

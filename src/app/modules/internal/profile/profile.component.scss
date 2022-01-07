@@ -43,3 +43,10 @@ h1{
 .cancel{
     grid-area: cancel;
 }
+
+.passwordModal{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+}

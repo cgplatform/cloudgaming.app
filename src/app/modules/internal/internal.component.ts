@@ -10,13 +10,13 @@ import { SessionService } from "src/app/core/services/session.service";
 })
 export class InternalComponent implements OnInit {
     
-    public user: User;
+    public user: User | undefined;
 
     constructor(
         private router: Router,
         private _sessionService: SessionService
     ) {
-      this.user = this._sessionService.get();
+      //this.user = this._sessionService.get();
     }
 
     ngOnInit(): void {
