@@ -8,7 +8,6 @@ import { User } from 'src/app/core/models/user.model';
 })
 export class LandingPageComponent implements OnInit {
 
-
   constructor() { }
 
   ngOnInit(): void {
