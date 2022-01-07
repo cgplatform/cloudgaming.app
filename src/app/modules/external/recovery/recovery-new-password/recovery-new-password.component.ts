@@ -6,6 +6,7 @@ import {
     Validators
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { UserMutationService } from "src/app/core/services/user/mutation.services";
 import { Field } from "src/app/shared/components/input/models/field.model";
 
 @Component({
@@ -24,7 +25,8 @@ export class RecoveryNewPasswordComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private activadedRoute: ActivatedRoute
+        private activadedRoute: ActivatedRoute,
+        private userMutationService: UserMutationService
     ) {
         this.loginForm = new FormGroup({});
         this.loginForm.addControl(
@@ -50,20 +52,19 @@ export class RecoveryNewPasswordComponent implements OnInit {
         this.activadedRoute.params.subscribe((params) => {
             this.params = params;
         });
-        console.log(this.params.token);
     }
 
     public get profileFormFields(): Field[] {
         return [
             {
-                type: "text",
+                type: "password",
                 placeholder: "Digite sua senha",
                 errors: {
                     required: "O campo é obrigatório"
                 }
             },
             {
-                type: "text",
+                type: "password",
                 placeholder: "Digite sua senha",
                 errors: {
                     required: "O campo é obrigatório",
@@ -77,12 +78,30 @@ export class RecoveryNewPasswordComponent implements OnInit {
         return this.loginForm.get(field) as FormControl;
     }
 
+    private get password() {
+        return this.loginForm.value.passwordControl;
+    }
+
+    public submit() {
+        if (this.loginForm.invalid) {
+            return this.loginForm.markAllAsTouched();
+        }
+
+        this.loading = true;
+
+        this.userMutationService
+            .resetPassword(this.password, this.params.token, ["name"])
+            .subscribe((response: any) => {
+                if (response.errors) {
+                    this.loading = false;
+                    return;
+                }
+                this.router.navigate(["/"]);
+            });
+    }
+
     buttonClick() {
-        if (this.loginForm.valid) {
-            this.loading = !this.loading;
-            //TODO mudar rota para rota da tela de entrada 2
-            this.router.navigate(["/profile"]);
-        } else this.close = !this.close;
+        this.submit();
     }
 
     validatorPassword = (input: AbstractControl) => {

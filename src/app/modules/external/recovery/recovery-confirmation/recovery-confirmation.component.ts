@@ -14,7 +14,6 @@ export class RecoveryConfirmationComponent implements OnInit {
     ngOnInit(): void {}
 
     public confirmation() {
-        //TODO alterar rota
-        this.router.navigate(["/profile"]);
+        this.router.navigate(["/"]);
     }
 }
