@@ -1,7 +1,9 @@
 <div class="alert">
-    <s2p-alert *ngIf="close" type="warning"
-        >"Necessário preencher os campos!"</s2p-alert
-    >
+    <s2p-alert
+        [show]="error.visible"
+        type="error"
+        [message]="error.message"
+    ></s2p-alert>
 </div>
 
 <div class="container">
@@ -11,7 +13,7 @@
             <s2p-input
                 class="email"
                 [field]="profileFormFields[0]"
-                [control]="getFormControl('emailControl')"
+                [control]="getFormControl('email')"
             ></s2p-input>
             <s2p-button
                 class="continue"

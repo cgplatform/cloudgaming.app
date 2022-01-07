@@ -16,13 +16,19 @@ export class RecoveryEmailComponent implements OnInit {
 
     public loading: boolean = false;
 
+    private errors: any = {
+        user_not_exists: "Email não existe!"
+    };
+
+    public error = { visible: false, message: "" };
+
     constructor(
         private router: Router,
         private userQueryService: UserQueryService
     ) {
         this.loginForm = new FormGroup({});
         this.loginForm.addControl(
-            "emailControl",
+            "email",
             new FormControl("", [Validators.required, Validators.email])
         );
     }
@@ -42,7 +48,7 @@ export class RecoveryEmailComponent implements OnInit {
         ];
     }
 
-    private get email() {
+    private get email(): string {
         return this.loginForm.value.email;
     }
 
@@ -62,15 +68,25 @@ export class RecoveryEmailComponent implements OnInit {
             .subscribe((response: any) => {
                 if (response.errors) {
                     this.loading = false;
+                    for (const error of response.errors) {
+                        this.setError(error.message);
+                    }
+                    return;
                 }
+                this.router.navigate(["/recovery/confirmation"]);
             });
     }
 
     buttonClick() {
         this.submit();
-        console.log(this.loading);
-        if (this.loginForm.valid && this.loading) {
-            this.router.navigate(["/recovery/confirmation"]);
-        } else this.close = !this.close;
+    }
+
+    public setError(alias: string) {
+        if (alias in this.errors) {
+            this.error = {
+                visible: true,
+                message: this.errors[alias]
+            };
+        }
     }
 }

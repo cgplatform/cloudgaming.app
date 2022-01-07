@@ -23,6 +23,12 @@ export class RecoveryNewPasswordComponent implements OnInit {
 
     private params: any;
 
+    private errors: any = {
+        invalid_token: "Solicite novamente a redifinição de senha!"
+    };
+
+    public error = { visible: false, message: "" };
+
     constructor(
         private router: Router,
         private activadedRoute: ActivatedRoute,
@@ -94,6 +100,9 @@ export class RecoveryNewPasswordComponent implements OnInit {
             .subscribe((response: any) => {
                 if (response.errors) {
                     this.loading = false;
+                    for (const error of response.errors) {
+                        this.setError(error.message);
+                    }
                     return;
                 }
                 this.router.navigate(["/"]);
@@ -102,6 +111,15 @@ export class RecoveryNewPasswordComponent implements OnInit {
 
     buttonClick() {
         this.submit();
+    }
+
+    public setError(alias: string) {
+        if (alias in this.errors) {
+            this.error = {
+                visible: true,
+                message: this.errors[alias]
+            };
+        }
     }
 
     validatorPassword = (input: AbstractControl) => {

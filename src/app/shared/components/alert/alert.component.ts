@@ -6,21 +6,22 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
     styleUrls: ["./alert.component.scss"]
 })
 export class AlertComponent implements OnInit {
- 
-
     @Output()
     public controller = new EventEmitter<{
         instance: any;
     }>();
 
+    @Input()
     public type: string = "success";
 
+    @Input()
     public message: string;
 
+    @Input()
     public show: boolean = true;
 
     constructor() {
-        this.message="";
+        this.message = "";
         this.controller.emit();
     }
 
@@ -32,11 +33,10 @@ export class AlertComponent implements OnInit {
         this.show = false;
     }
 
-    showMessage(message: string, type: string){
-        this.message=message;
-        this.type=type;
-        this.show=true;
+    showMessage(message: string, type: string) {
+        this.message = message;
+        this.type = type;
+        this.show = true;
         setTimeout(() => (this.show = false), 5000);
     }
-
 }
