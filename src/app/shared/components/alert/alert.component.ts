@@ -21,7 +21,9 @@ export class AlertComponent implements OnInit {
 
     constructor() {
         this.message = "";
-        this.controller.emit();
+        this.controller.emit({
+            instance: this
+        });
     }
 
     ngOnInit(): void {

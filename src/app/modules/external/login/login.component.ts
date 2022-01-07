@@ -27,11 +27,11 @@ export class LoginComponent implements OnInit {
         ) {
         this.loginForm = new FormGroup({});
         this.loginForm.addControl(
-            "emailControl",
+            "email",
             new FormControl("", [Validators.required, Validators.email])
         );
         this.loginForm.addControl(
-            "senhaControl",
+            "password",
             new FormControl("", [Validators.required])
         );
     }
@@ -73,12 +73,13 @@ export class LoginComponent implements OnInit {
     loggIn() {
         if (this.loginForm.valid) {
             this.loading =true;
-            const value = this.loginForm.value
+            const value = this.loginForm.value;
             this._userQueryService.login(value.email, value.password).subscribe((result:any)=>{
                 const token = result.data.token;
                 const id = result.data.id;
                 this.createSession(token, id);
             },(fail:HttpErrorResponse)=>{
+                console.log(fail)
                 if(fail.message==="email_or_password"){
                     this.alert?.showMessage("Email ou senha inválidos","warning");
                     this.loading =false;
@@ -102,10 +103,16 @@ export class LoginComponent implements OnInit {
             token:token
         }
         this._sessionService.set(temporaryUser);
+        const variables = {
+            id:{
+                value: id,
+                required:false
+            }
+        }
         const fields = ["name","email","phone","birthdate","id","verified"]
-        this._userQueryService.filterBy({id:{id}},fields).subscribe((result:any)=>{
+        this._userQueryService.filterBy(variables,fields).subscribe((result:any)=>{
             this._sessionService.set(result.data);
-            this.router.navigate(['']);
+            this.router.navigate(['/']);
             this.loading =false;
 
         },(fail:HttpErrorResponse)=>{

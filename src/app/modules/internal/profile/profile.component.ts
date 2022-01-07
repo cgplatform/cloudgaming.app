@@ -30,7 +30,7 @@ export class ProfileComponent extends ModalController implements OnInit {
     public userSession={
         name: "Luiz",
         birthdate: "11/01/2001",
-        email:"bah",
+        email:"luizeduardo112001@gmail.com",
         phone: "31989293599"
     };
 
