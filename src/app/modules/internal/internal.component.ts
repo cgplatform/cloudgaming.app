@@ -25,7 +25,7 @@ export class InternalComponent implements OnInit {
         if(this.user){
             this.router.navigate(["/profile"]);
         }else{
-            this.router.navigate(["/register"]);
+            this.router.navigate(["/login"]);
         }
     }
 
