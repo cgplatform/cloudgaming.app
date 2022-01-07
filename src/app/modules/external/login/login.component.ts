@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
                 }
             },
             {
-                type: "text",
+                type: "password",
                 placeholder: "Digite sua senha",
                 labelLink: {
                     text: "Esqueceu sua senha?",

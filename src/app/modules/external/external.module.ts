@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ExternalRoutingModule } from './external-routing.module';
 import { ExternalComponent } from './external.component';
+import { InternalComponent } from '../internal/internal.component';
 
 
 @NgModule({

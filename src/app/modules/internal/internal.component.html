@@ -1,49 +1,7 @@
-<!-- <div id="components-page">
-    <div class="container">
-        <div class="component-area">
-            <div class="info">
-                <div class="title">Cards</div>
-                <div class="description">Componente para exibir o poster dos jogos. É possível configurar o componente
-                    em duas visualizações: portrait e landscape.</div>
-            </div>
-            <div class="content">
-                <s2p-cards type="portrait" [imgPaths]="arrayCards" (iconeStart)="clickPlay($event)" play="fas fa-play">
-                </s2p-cards>
-            </div>
-        </div>
-
-        <div class="component-area">
-            <div class="info">
-                <div class="title">Botões</div>
-                <div class="description">Componente padrão de botão. Possui eventos de click e efeito de loading.</div>
-            </div>
-            <div class="content">
-                <s2p-button [isLoading]="loading" color="blue" (click)="buttonClick()" (icone)="clickIcone($event)" (text)="clickText($event)"
-                    posfix="fas fa-arrow-right">
-                    Clique em mim</s2p-button>
-            </div>
-        </div>
-        
-        <div class="component-area">
-            <div class="info">
-                <div class="title">Inputs</div>
-                <div class="description">Componente padrão de input. Pode ser configurado na forma de um select, input e textarea. Oferece suporte ao FormControl.</div>
-            </div>
-            <div class="content buttons">
-                <s2p-input [field]="emailField" [control]="emailControl"></s2p-input>
-                <s2p-input [field]="selectField" [control]="selectControl"></s2p-input>
-                <s2p-input [field]="textareaField" [control]="textareaControl"></s2p-input>
-            </div>
-        </div>
-
-         <s2p-modal id="Teste" (controller)="modalInstance($event)"></s2p-modal> 
-
-    </div>
-</div> -->
 <div id="main-container">
     <div class="header">
-        <h1>Start2Play</h1>
-        <h2 class="profile"><i class="fas fa-user-circle"></i> Profile</h2>
+        <div class="logo" (click)="home()"></div>
+        <h2 class="profile" (click)="profileAction()"><i class="fas fa-user-circle"></i>{{user ? user.name : 'Entrar'}}</h2>
     </div>
     <div id="internal-components">
         <router-outlet></router-outlet>  

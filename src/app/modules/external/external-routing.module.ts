@@ -1,8 +1,15 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { InternalComponent } from "../internal/internal.component";
 import { ExternalComponent } from "./external.component";
 
 const routes: Routes = [
+    {
+        path: "",
+        loadChildren: () =>
+            import("./landing-page/landing-page.module").then((m) => m.LandingPageModule),
+        component: InternalComponent
+    },
     {
         path: "register",
         loadChildren: () =>

@@ -108,7 +108,7 @@ input:-webkit-autofill:active {
 
 .placeholder {
     font-size: 0.9rem;
-    color: $font-color-main;
+    color: rgba($font-color-main, 0.3);
 }
 
 textarea {

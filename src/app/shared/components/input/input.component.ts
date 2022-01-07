@@ -43,13 +43,15 @@ export class InputComponent implements OnInit {
 
         console.log(inputs);
 
-
         if (input) {
             input.focus();
         }
     }
 
     public get required(): boolean {
+        if (this.field.ignoreRequired) {
+            return false;
+        }
         if (this.control.validator) {
             const validator = this.control.validator({} as AbstractControl)!;
             if (validator && validator["required"]) {

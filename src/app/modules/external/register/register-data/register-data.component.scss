@@ -1,0 +1,56 @@
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+@import "../../../../../assets/scss/variables.scss";
+
+.container {
+    display: grid;
+    grid-template-columns: 0.7fr 1fr;
+    justify-items: center;
+}
+
+.image {
+    background-image: url(../../../../../assets/images/characters/banana.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 22rem;
+    height: 100%;
+}
+
+h1 {
+    color: $font-color-main;
+}
+
+.user-info-container {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem 1.3rem;
+    gap: 2rem 1.3rem;
+    grid-template-areas: "first-name second-name" "email email" "phone phone" "birth-date birth-date" "password password" "login auto";
+}
+
+.first-name {
+    grid-area: first-name;
+}
+.second-name {
+    grid-area: second-name;
+}
+.email {
+    grid-area: email;
+}
+.phone {
+    grid-area: phone;
+}
+.password {
+    grid-area: password;
+}
+.log-in {
+    grid-area: login;
+}
+.birth-date-container {
+    grid-area: birth-date;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}

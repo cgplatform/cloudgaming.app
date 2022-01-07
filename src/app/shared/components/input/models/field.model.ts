@@ -11,6 +11,7 @@ export interface Field {
     label?: string;
     placeholder?: string;
     labelLink?: { text: string; url: string };
+    ignoreRequired?: boolean;
 
     //Mask Configuration
     mask?: string;
