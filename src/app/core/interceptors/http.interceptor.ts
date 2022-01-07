@@ -28,7 +28,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 
             if (!request.headers.has("Token")) {
                 request = request.clone({
-                    headers: request.headers.set("Token", user.token)
+                    headers: request.headers.set("Token", user.token!)
                 });
             }
         } finally {
