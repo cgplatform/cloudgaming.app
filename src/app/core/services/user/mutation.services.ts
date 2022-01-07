@@ -6,8 +6,12 @@ import { config } from "app.config";
 import * as gql from "gql-query-builder";
 
 import { User } from "../../models/user.model";
+import { Injectable } from "@angular/core";
 
-export class UserQueryService {
+@Injectable({
+    providedIn: "root"
+})
+export class UserMutationService {
     private host = `${config.api.host}/user`;
 
     constructor(private http: HttpClient) {}
@@ -68,8 +72,11 @@ export class UserQueryService {
         return this.http.post(this.host, query);
     }
 
-
-    public resetPassword(password: string, token: string, fields: string[]): Observable<any> {
+    public resetPassword(
+        password: string,
+        token: string,
+        fields: string[]
+    ): Observable<any> {
         const query = gql.mutation({
             operation: "reset_password",
             variables: {
@@ -82,7 +89,7 @@ export class UserQueryService {
                     required: true
                 }
             },
-            fields: [fields]
+            fields: fields
         });
 
         return this.http.post(this.host, query);
