@@ -32,4 +32,44 @@ export class UserQueryService {
 
         return this.http.post(this.host, query);
     }
+
+    public filterBy(variables: any, fields: string[]): Observable<any> {
+        const query = gql.query({
+            operation: "filterBy",
+            variables: variables,
+            fields: fields
+        });
+
+        return this.http.post(this.host, query);
+    }
+
+    public confirmEmail(token: string): Observable<any> {
+        const query = gql.query({
+            operation: "emailConfirmation",
+            variables:{
+                Token: {
+                    value: token,
+                    required: true
+                }
+            },
+            fields: ["token"]
+        });
+
+        return this.http.post(this.host, query);
+    }
+
+    public recovery(email: string): Observable<any> {
+        const query = gql.query({
+            operation: "recovery",
+            variables: {
+                email: {
+                    value: email,
+                    required: true
+                }
+            },
+            fields: ["email"]
+        });
+
+        return this.http.post(this.host, query);
+    }
 }

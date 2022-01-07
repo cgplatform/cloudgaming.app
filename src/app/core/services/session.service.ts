@@ -19,11 +19,18 @@ export class SessionService {
     ) {}
 
     public refresh(): void {
-        const user = this.localStorageService.get("user");
+        const data = this.localStorageService.get("user");
 
-        if (!user) {
+        if (!data) {
             throw new Error(Errors.INVALID_SESSION);
         }
+
+        this.user = JSON.parse(data);
+    }
+
+    public set(user: User): void {
+        this.user = user;
+        this.localStorageService.set("user", JSON.stringify(user));
     }
 
     public get(): User {
