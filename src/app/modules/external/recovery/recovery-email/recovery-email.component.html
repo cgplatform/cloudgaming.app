@@ -1,0 +1,37 @@
+<div class="alert">
+    <s2p-alert
+        [show]="error.visible"
+        type="error"
+        [message]="error.message"
+    ></s2p-alert>
+</div>
+
+<div class="container">
+    <div>
+        <h1>REDEFINIR SENHA</h1>
+        <div class="access-container">
+            <s2p-input
+                class="email"
+                [field]="profileFormFields[0]"
+                [control]="getFormControl('email')"
+            ></s2p-input>
+            <s2p-button
+                class="continue"
+                [isLoading]="loading"
+                color="blue"
+                (click)="buttonClick()"
+                posfix="fas fa-arrow-right"
+            >
+                Continuar
+            </s2p-button>
+        </div>
+    </div>
+
+    <div>
+        <img
+            src="../../../../assets/images/characters/jett.png"
+            width="350px"
+            height="500px"
+        />
+    </div>
+</div>

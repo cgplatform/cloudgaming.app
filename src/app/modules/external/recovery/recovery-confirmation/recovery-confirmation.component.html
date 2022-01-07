@@ -1,0 +1,33 @@
+<div class="alert">
+    <s2p-alert *ngIf="close" type="warning"
+        >"Necessário confirmar o email!"</s2p-alert
+    >
+</div>
+
+<div class="container">
+    <div>
+        <div class="check">
+            <div class="elipse">
+                <i class="fas fa-envelope mail"></i>
+            </div>
+        </div>
+        <h1>ENVIAMOS UM E-MAIL PARA VOCÊ</h1>
+        <div class="access-container">
+            <p class="info">
+                O e-mail contém os próximos passos para você redefinir a sua
+                senha.
+            </p>
+            <a class="link" routerLink="" (click)="confirmation()"
+                >PROSSEGUIR</a
+            >
+        </div>
+    </div>
+
+    <div>
+        <img
+            src="../../../../assets/images/characters/banana.png"
+            width="350px"
+            height="500px"
+        />
+    </div>
+</div>

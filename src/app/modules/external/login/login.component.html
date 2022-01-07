@@ -1,0 +1,42 @@
+<s2p-alert (controller)="alertEvent($event)"></s2p-alert
+    >
+
+
+<div class="container">
+    <div>
+        <h1>ACESSAR CONTA</h1>
+        <div class="access-container">
+            <s2p-input
+                class="email"
+                [field]="profileFormFields[0]"
+                [control]="getFormControl('emailControl')"
+            ></s2p-input>
+            <s2p-input
+                class="password"
+                [field]="profileFormFields[1]"
+                [control]="getFormControl('senhaControl')"
+            ></s2p-input>
+            <s2p-button
+                class="log-in"
+                [isLoading]="loading"
+                color="blue"
+                (click)="loggIn()"
+                posfix="fas fa-arrow-right"
+            >
+                Entrar
+            </s2p-button>
+            <p class="createConta">
+                Ainda não possui uma conta?
+                <a href="/register/data">Registrar</a>
+            </p>
+        </div>
+    </div>
+
+    <div>
+        <img
+            src="../../../../assets/images/characters/jett.png"
+            width="350px"
+            height="500px"
+        />
+    </div>
+</div>

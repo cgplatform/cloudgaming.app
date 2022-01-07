@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "./assets/scss/font.scss";
+@import "./assets/scss/variables.scss";
 
 body {
   margin: 0;
@@ -8,4 +9,5 @@ body {
   background: linear-gradient(328.39deg, #191e26 1.93%, #353f55 90.84%), #d8d8d8;
   background-repeat: no-repeat;
   min-height: 100vh;
+  color: $font-color-main
 }
