@@ -1,6 +1,6 @@
 export const config = {
     api: {
-        host: "https://start2play.games"
+        host: "http://127.0.0.1:8080"
     },
 
     app: {

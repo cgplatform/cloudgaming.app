@@ -27,7 +27,7 @@ export class UserQueryService {
                     required: true
                 }
             },
-            fields: ["token"]
+            fields: ["token","id"]
         });
 
         return this.http.post(this.host, query);

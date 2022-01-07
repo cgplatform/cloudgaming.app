@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
     selector: "s2p-alert",
@@ -6,21 +6,36 @@ import { Component, Input, OnInit } from "@angular/core";
     styleUrls: ["./alert.component.scss"]
 })
 export class AlertComponent implements OnInit {
-    @Input()
-    public information: string = "";
+    @Output()
+    public controller = new EventEmitter<{
+        instance: any;
+    }>();
 
     @Input()
     public type: string = "success";
 
-    public close: boolean = true;
+    @Input()
+    public message: string;
 
-    constructor() {}
+    public show: boolean = false;
+
+    constructor() {
+        this.message = "";
+        this.controller.emit();
+    }
 
     ngOnInit(): void {
-        setTimeout(() => (this.close = false), 5000);
+        setTimeout(() => (this.show = false), 5000);
     }
 
     closeAlert() {
-        this.close = false;
+        this.show = false;
+    }
+
+    showMessage(message: string, type: string) {
+        this.message = message;
+        this.type = type;
+        this.show = true;
+        setTimeout(() => (this.show = false), 5000);
     }
 }

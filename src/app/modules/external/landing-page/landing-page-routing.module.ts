@@ -4,7 +4,7 @@ import { LandingPageComponent } from "./landing-page.component";
 
 const routes: Routes = [
     { path: "", component: LandingPageComponent },
-    { path: "/verify/:id", component: LandingPageComponent }
+    { path: "/verify/:token", component: LandingPageComponent }
 ];
 
 @NgModule({
