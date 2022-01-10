@@ -2,6 +2,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { AppComponent } from "src/app/app.component";
 import { User } from "src/app/core/models/user.model";
 import { SessionService } from "src/app/core/services/session.service";
 import { UserMutationService } from "src/app/core/services/user/mutation.services";
@@ -36,11 +37,10 @@ export class ProfileComponent extends ModalController implements OnInit {
 
     public passwordControl: FormControl;
 
-    public alert: AlertComponent | undefined;
 
     constructor(
         private router: Router,
-       
+        private appComponent: AppComponent,
         private _userMutationService: UserMutationService
     ) {
         super();
@@ -143,9 +143,7 @@ export class ProfileComponent extends ModalController implements OnInit {
         ];
     }
 
-    public alertEvent(event: {instance: AlertComponent}){
-        this.alert=event.instance;
-    }
+  
 
 
     public update() {
@@ -167,10 +165,10 @@ export class ProfileComponent extends ModalController implements OnInit {
             }
             const fields = ["name"]
             this._userMutationService.updateBy(fixedDate,fields).subscribe((result:any)=>{
-                this.alert?.showMessage("Usuário atualizado com sucesso", "success");
+                this.appComponent.showMessage("Usuário atualizado com sucesso", "success");
                 this.isLoading.update=false;
             },(fail:HttpErrorResponse)=>{
-                this.alert?.showMessage("Falha ao atualizar usuário", "error");
+                this.appComponent.showMessage("Falha ao atualizar usuário", "error");
                 this.isLoading.update=false;
             });
         }
@@ -195,10 +193,10 @@ export class ProfileComponent extends ModalController implements OnInit {
             this.closeModal("modalPassword");
         },(fail:HttpErrorResponse)=>{
             if(fail.message==="wrong_password"){
-                this.alert?.showMessage("Senha incorreta", "error");
+                this.appComponent.showMessage("Senha incorreta", "error");
                 
             }
-            this.alert?.showMessage("Falha ao deletar usuário", "error");
+            this.appComponent.showMessage("Falha ao deletar usuário", "error");
             this.isLoading.delete=false;
             this.closeModal("modalPassword");
         })

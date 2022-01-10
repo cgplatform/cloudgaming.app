@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { AppComponent } from "src/app/app.component";
 import { UserQueryService } from "src/app/core/services/user/query.services";
 import { Field } from "src/app/shared/components/input/models/field.model";
 
@@ -24,7 +25,8 @@ export class RecoveryEmailComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private userQueryService: UserQueryService
+        private userQueryService: UserQueryService,
+        private appComponent: AppComponent
     ) {
         this.loginForm = new FormGroup({});
         this.loginForm.addControl(
@@ -69,7 +71,7 @@ export class RecoveryEmailComponent implements OnInit {
                 if (response.errors) {
                     this.loading = false;
                     for (const error of response.errors) {
-                        this.setError(error.message);
+                        this.appComponent.showMessage(error.message,"warning");
                     }
                     return;
                 }
@@ -81,12 +83,4 @@ export class RecoveryEmailComponent implements OnInit {
         this.submit();
     }
 
-    public setError(alias: string) {
-        if (alias in this.errors) {
-            this.error = {
-                visible: true,
-                message: this.errors[alias]
-            };
-        }
-    }
 }

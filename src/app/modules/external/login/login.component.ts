@@ -2,6 +2,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { AppComponent } from "src/app/app.component";
 import { SessionService } from "src/app/core/services/session.service";
 import { UserQueryService } from "src/app/core/services/user/query.services";
 import { AlertComponent } from "src/app/shared/components/alert/alert.component";
@@ -18,12 +19,12 @@ export class LoginComponent implements OnInit {
 
     public loading: boolean = false;
 
-    public alert: AlertComponent | undefined;
 
     constructor(
             private router: Router,
             private _userQueryService: UserQueryService,
-            private _sessionService: SessionService
+            private _sessionService: SessionService,
+            private appComponent: AppComponent
         ) {
         this.loginForm = new FormGroup({});
         this.loginForm.addControl(
@@ -62,10 +63,6 @@ export class LoginComponent implements OnInit {
         ];
     }
 
-    public alertEvent(event:{instance: AlertComponent}){
-        this.alert=event.instance;
-    }
-
     public getFormControl(field: string) {
         return this.loginForm.get(field) as FormControl;
     }
@@ -81,16 +78,16 @@ export class LoginComponent implements OnInit {
             },(fail:HttpErrorResponse)=>{
                 console.log(fail)
                 if(fail.message==="email_or_password"){
-                    this.alert?.showMessage("Email ou senha inválidos","warning");
+                    this.appComponent.showMessage("Email ou senha inválidos","error");
                     this.loading =false;
                     return
                 }
                 this.loading =false;
-
-                this.alert?.showMessage("Falha ao loggar","error");
+                this.appComponent.showMessage("Falha ao logar, tente novamente mais tarde","error");
             })
         } else{
-            this.alert?.showMessage("Os campos devem ser devidamente preenchidos!", "warning")
+            this.appComponent.showMessage("Preencha os campos corretamente","warning");
+
         }
     }
 
@@ -116,7 +113,7 @@ export class LoginComponent implements OnInit {
             this.loading =false;
 
         },(fail:HttpErrorResponse)=>{
-            this.alert?.showMessage("Falha ao loggar","error");
+            this.appComponent.showMessage("Falha ao criar sessão, tente novamente mais tarde","error");
             this._sessionService.destroy();
             this.loading =false;
 
