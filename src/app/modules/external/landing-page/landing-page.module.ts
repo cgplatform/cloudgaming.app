@@ -13,7 +13,7 @@ import { ComponentsModule } from 'src/app/shared/components/components.module';
   imports: [
     CommonModule,
     ComponentsModule,
-    LandingPageRoutingModule
+    LandingPageRoutingModule,
   ]
 })
 export class LandingPageModule { }

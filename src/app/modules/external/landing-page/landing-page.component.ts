@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { User } from 'src/app/core/models/user.model';
 
 @Component({
@@ -8,9 +9,14 @@ import { User } from 'src/app/core/models/user.model';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private appComponent: AppComponent
+  ) { }
 
   ngOnInit(): void {
+    this.appComponent.showMessage("O seu e-mail foi confirmado com sucesso","info");
+   
+
   }
 
 }
