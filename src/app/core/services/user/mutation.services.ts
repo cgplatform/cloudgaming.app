@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { config } from "app.config";
@@ -6,7 +7,6 @@ import { config } from "app.config";
 import * as gql from "gql-query-builder";
 
 import { User } from "../../models/user.model";
-import { Injectable } from "@angular/core";
 
 @Injectable({
     providedIn: "root"

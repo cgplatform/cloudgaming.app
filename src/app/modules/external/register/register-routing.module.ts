@@ -4,8 +4,8 @@ import { RegisterConfirmationComponent } from "./register-confirmation/register-
 import { RegisterDataComponent } from "./register-data/register-data.component";
 
 const routes: Routes = [
-    { path: "data", component: RegisterDataComponent },
-    { path: "confirmation", component: RegisterConfirmationComponent }
+    { path: "", component: RegisterDataComponent },
+    { path: "sucess", component: RegisterConfirmationComponent }
 ];
 
 @NgModule({
