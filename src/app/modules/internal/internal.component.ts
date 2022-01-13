@@ -16,7 +16,12 @@ export class InternalComponent implements OnInit {
         private router: Router,
         private _sessionService: SessionService
     ) {
-      //this.user = this._sessionService.get();
+        try{
+            this._sessionService.refresh();
+            this.user = this._sessionService.get();
+        }catch(e){
+
+        }
     }
 
     ngOnInit(): void {

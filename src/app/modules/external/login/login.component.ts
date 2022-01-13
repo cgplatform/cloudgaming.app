@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
 
     public loading: boolean = false;
 
+    private errors: any = {
+        email_or_password_invalid: "Email ou senha inválidos!"
+    };
 
     constructor(
             private router: Router,
@@ -72,16 +75,20 @@ export class LoginComponent implements OnInit {
             this.loading =true;
             const value = this.loginForm.value;
             this._userQueryService.login(value.email, value.password).subscribe((result:any)=>{
-                const token = result.data.token;
-                const id = result.data.id;
-                this.createSession(token, id);
-            },(fail:HttpErrorResponse)=>{
-                console.log(fail)
-                if(fail.message==="email_or_password"){
-                    this.appComponent.showMessage("Email ou senha inválidos","error");
-                    this.loading =false;
-                    return
+                if (result.errors) {
+                    this.loading = false;
+                    for (const error of result.errors) {
+                        if(error.message in this.errors){
+                            this.appComponent.showMessage(this.errors[error.message],"warning");
+                        }else{
+                            this.appComponent.showMessage("Falha ao efetuar login, tente novamente mais tarde","error");
+                        }
+                    }
+                    return;
                 }
+            
+                this.createSession(result.data.login.token, value.email);
+            },(fail:HttpErrorResponse)=>{
                 this.loading =false;
                 this.appComponent.showMessage("Falha ao logar, tente novamente mais tarde","error");
             })
@@ -91,24 +98,34 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    createSession(token: string, id:string){
+    createSession(token: string, email:string){
         const temporaryUser = {
             name:"default",
             birthdate: "default",
             phone: "dafualt",
             email:"default",
-            token:token
+            token: token
         }
         this._sessionService.set(temporaryUser);
         const variables = {
-            id:{
-                value: id,
+            email:{
+                value: email,
                 required:false
             }
         }
         const fields = ["name","email","phone","birthdate","id","verified"]
         this._userQueryService.filterBy(variables,fields).subscribe((result:any)=>{
-            this._sessionService.set(result.data);
+            if (result.errors) {
+                this.loading = false;
+                for (const error of result.errors) {
+                    this.appComponent.showMessage("Falha ao criar sessão, tente novamente mais tarde","error");
+                }
+                this._sessionService.destroy();
+                return;
+            }
+            const user = result.data.filterBy[0];
+            user.token = token;
+            this._sessionService.set(user);
             this.router.navigate(['/']);
             this.loading =false;
 
@@ -116,7 +133,6 @@ export class LoginComponent implements OnInit {
             this.appComponent.showMessage("Falha ao criar sessão, tente novamente mais tarde","error");
             this._sessionService.destroy();
             this.loading =false;
-
         })
     }
 

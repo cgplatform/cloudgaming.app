@@ -28,30 +28,26 @@ export class ProfileComponent extends ModalController implements OnInit {
     public updateButtonText: string = "Alterar dados";
     public cancelButtonText: string = "Desativar Usuário";
 
-    public userSession={
-        name: "Luiz",
-        birthdate: "11/01/2001",
-        email:"luizeduardo112001@gmail.com",
-        phone: "31989293599"
-    };
+    public userSession: User;
 
     public passwordControl: FormControl;
 
+    private errors: any = {
+        wrong_password: "Senha incorreta!"
+    };
 
     constructor(
         private router: Router,
         private appComponent: AppComponent,
-        private _userMutationService: UserMutationService
+        private _userMutationService: UserMutationService,
+        private _sessionService: SessionService
     ) {
         super();
+
+        this.userSession = this._sessionService.get();
       
         this.profileForm = new FormGroup({});
         this.passwordControl = new FormControl('',[Validators.required]);
-
-        if(!this.userSession){
-            this.router.navigate(['']);
-            return;
-        }
 
         this.profileForm.addControl(
             "name",
@@ -153,6 +149,7 @@ export class ProfileComponent extends ModalController implements OnInit {
             this.cancelButtonText = "Cancelar";
         } else {
             if(this.profileForm.invalid){
+                this.appComponent.showMessage("Há campos mal preenchidos", "warning");
                 return;
             }
             this.isLoading.update=true;
@@ -163,10 +160,27 @@ export class ProfileComponent extends ModalController implements OnInit {
                 email: updatedUser.email,
                 phone: updatedUser.phone,
             }
-            const fields = ["name"]
+            const fields = ["name","phone","birthdate","email","verified"]
             this._userMutationService.updateBy(fixedDate,fields).subscribe((result:any)=>{
+                if (result.errors) {
+                    this.isLoading.delete = false;
+                    for (const error of result.errors) {
+                        if(error.message in this.errors){
+                            this.appComponent.showMessage(this.errors[error.message],"warning");
+                        }else{
+                            this.appComponent.showMessage("Falha ao atualizar usuário","error");
+                        }
+                    }
+                    return;
+                }
                 this.appComponent.showMessage("Usuário atualizado com sucesso", "success");
+                const updatedUser = result.data.updateBy;
+                updatedUser.token = this.userSession.token;
+                this._sessionService.set(updatedUser);
                 this.isLoading.update=false;
+                this.profileForm.disable();
+                this.updateButtonText = "Alterar dados";
+                this.cancelButtonText = "Desativar Usuário";
             },(fail:HttpErrorResponse)=>{
                 this.appComponent.showMessage("Falha ao atualizar usuário", "error");
                 this.isLoading.update=false;
@@ -180,22 +194,41 @@ export class ProfileComponent extends ModalController implements OnInit {
             this.openModal("modalPassword");
         } else {
             this.profileForm.disable();
+            this.resetUser();
             this.updateButtonText = "Alterar dados";
             this.cancelButtonText = "Desativar Usuário";
         }
     }
 
-    removeUser(){
+    public resetUser(){
+        this.profileForm.setValue({
+            name: this.userSession.name,
+            email: this.userSession.email,
+            phone: this.userSession.phone,
+            birthDay: this.userSession.birthdate.substring(0,2),
+            birthMonth: this.userSession.birthdate.substring(3,5),
+            birthYear: this.userSession.birthdate.substring(6)
+        })
+    }
+
+    public removeUser(){
         this.isLoading.delete=true;
-        this._userMutationService.delete(this.passwordControl.value).subscribe((resul:any)=>{
-            this.router.navigate(['']);
+        this._userMutationService.delete(this.passwordControl.value).subscribe((result:any)=>{
+            if (result.errors) {
+                this.isLoading.delete = false;
+                for (const error of result.errors) {
+                    if(error.message in this.errors){
+                        this.appComponent.showMessage(this.errors[error.message],"warning");
+                    }else{
+                        this.appComponent.showMessage("Falha ao deletar usuário","error");
+                    }
+                }
+                return;
+            }
+            this._sessionService.destroy();
             this.isLoading.delete=false;
             this.closeModal("modalPassword");
         },(fail:HttpErrorResponse)=>{
-            if(fail.message==="wrong_password"){
-                this.appComponent.showMessage("Senha incorreta", "error");
-                
-            }
             this.appComponent.showMessage("Falha ao deletar usuário", "error");
             this.isLoading.delete=false;
             this.closeModal("modalPassword");

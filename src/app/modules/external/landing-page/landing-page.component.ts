@@ -14,10 +14,12 @@ export class LandingPageComponent implements OnInit {
 
     constructor(
         private userQueryService: UserQueryService,
-        private activadedRoute: ActivatedRoute
+        private activadedRoute: ActivatedRoute,
+        private appComponent: AppComponent
     ) {}
 
     ngOnInit(): void {
+
         this.activadedRoute.params.subscribe((params: any) => {
             this.params = params;
             this.verifyAccount();

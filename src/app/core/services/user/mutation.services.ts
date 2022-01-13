@@ -64,7 +64,7 @@ export class UserMutationService {
 
     public updateBy(variables: any, fields: string[]): Observable<any> {
         const query = gql.mutation({
-            operation: "delete",
+            operation: "updateBy",
             variables: variables,
             fields: fields
         });

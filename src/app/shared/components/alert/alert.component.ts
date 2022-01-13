@@ -53,7 +53,6 @@ export class AlertComponent implements OnInit {
     }
 
     showMessage(message: string, type: string) {
-        console.log("passei")
         //if there is an alert already on the screen
         if(this.currentTimeout){
             clearTimeout(this.currentTimeout);
@@ -88,7 +87,7 @@ export class AlertComponent implements OnInit {
 
         this.currentTimeout = setTimeout(()=>{
             this.closeAlert();
-        }, 500000);
+        }, 5000);
     }
 
     private setTime(callback: Function) {
