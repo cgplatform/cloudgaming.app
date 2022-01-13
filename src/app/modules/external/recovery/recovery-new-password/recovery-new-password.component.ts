@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AppComponent } from "src/app/app.component";
+import { ApiErrors } from "src/app/core/errors/api-errors.error";
 import { UserMutationService } from "src/app/core/services/user/mutation.services";
 import { Field } from "src/app/shared/components/input/models/field.model";
 
@@ -24,9 +25,7 @@ export class RecoveryNewPasswordComponent implements OnInit {
 
     private params: any;
 
-    private errors: any = {
-        invalid_token: "Solicite novamente a redifinição de senha!"
-    };
+
 
     public error = { visible: false, message: "" };
 
@@ -36,6 +35,7 @@ export class RecoveryNewPasswordComponent implements OnInit {
         private userMutationService: UserMutationService,
         private appComponent: AppComponent
     ) {
+        ApiErrors.invalid_token="SOlicite a redefinição de senha novamente!";
         this.loginForm = new FormGroup({});
         this.loginForm.addControl(
             "passwordControl",
@@ -103,7 +103,11 @@ export class RecoveryNewPasswordComponent implements OnInit {
                 if (response.errors) {
                     this.loading = false;
                     for (const error of response.errors) {
-                        this.appComponent.showMessage(error.message,"warning");
+                        if(error.message in ApiErrors){
+                            this.appComponent.showMessage(ApiErrors[error.message],"warning");
+                        }else{
+                            this.appComponent.showMessage("Falha ao efetuar redefinição da senha, tente novamente mais tarde","error");
+                        }
                     }
                     return;
                 }

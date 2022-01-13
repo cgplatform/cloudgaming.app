@@ -44,8 +44,8 @@ export class SessionService {
     public destroy(): void {
         this.localStorageService.remove("user");
 
-        if (this.router.url.indexOf("/") == -1) {
-            this.router.navigateByUrl("/");
+        if (this.router.url.indexOf("/login") == -1) {
+            this.router.navigateByUrl("/login");
             return;
         }
 

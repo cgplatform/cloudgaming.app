@@ -5,8 +5,8 @@ import { Router } from "@angular/router";
 import { AppComponent } from "src/app/app.component";
 import { SessionService } from "src/app/core/services/session.service";
 import { UserQueryService } from "src/app/core/services/user/query.services";
-import { AlertComponent } from "src/app/shared/components/alert/alert.component";
 import { Field } from "src/app/shared/components/input/models/field.model";
+import { ApiErrors } from "src/app/core/errors/api-errors.error";
 
 @Component({
     selector: "app-login",
@@ -19,9 +19,6 @@ export class LoginComponent implements OnInit {
 
     public loading: boolean = false;
 
-    private errors: any = {
-        email_or_password_invalid: "Email ou senha inválidos!"
-    };
 
     constructor(
             private router: Router,
@@ -78,8 +75,8 @@ export class LoginComponent implements OnInit {
                 if (result.errors) {
                     this.loading = false;
                     for (const error of result.errors) {
-                        if(error.message in this.errors){
-                            this.appComponent.showMessage(this.errors[error.message],"warning");
+                        if(error.message in ApiErrors){
+                            this.appComponent.showMessage(ApiErrors[error.message],"warning");
                         }else{
                             this.appComponent.showMessage("Falha ao efetuar login, tente novamente mais tarde","error");
                         }

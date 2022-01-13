@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AppComponent } from "src/app/app.component";
+import { ApiErrors } from "src/app/core/errors/api-errors.error";
 import { UserQueryService } from "src/app/core/services/user/query.services";
 import { Field } from "src/app/shared/components/input/models/field.model";
 
@@ -16,10 +17,6 @@ export class RecoveryEmailComponent implements OnInit {
     public close: boolean = false;
 
     public loading: boolean = false;
-
-    private errors: any = {
-        user_not_exists: "Email não existe!"
-    };
 
     public error = { visible: false, message: "" };
 
@@ -71,7 +68,11 @@ export class RecoveryEmailComponent implements OnInit {
                 if (response.errors) {
                     this.loading = false;
                     for (const error of response.errors) {
-                        this.appComponent.showMessage(error.message,"warning");
+                        if(error.message in ApiErrors){
+                            this.appComponent.showMessage(ApiErrors[error.message],"warning");
+                        }else{
+                            this.appComponent.showMessage("Falha ao enviar email, tente novamente mais tarde","error");
+                        }
                     }
                     return;
                 }

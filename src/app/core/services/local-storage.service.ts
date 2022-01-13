@@ -32,7 +32,7 @@ export class LocalStorageService {
     }
 
     remove(key: string) {
-        key = this.encrypt(key);
+        //key = this.encrypt(key);
 
         localStorage.removeItem(key);
     }

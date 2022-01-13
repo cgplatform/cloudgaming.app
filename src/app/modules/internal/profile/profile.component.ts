@@ -3,10 +3,10 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AppComponent } from "src/app/app.component";
+import { ApiErrors } from "src/app/core/errors/api-errors.error";
 import { User } from "src/app/core/models/user.model";
 import { SessionService } from "src/app/core/services/session.service";
 import { UserMutationService } from "src/app/core/services/user/mutation.services";
-import { AlertComponent } from "src/app/shared/components/alert/alert.component";
 import { Field } from "src/app/shared/components/input/models/field.model";
 import { ModalController } from "src/app/shared/components/modal/models/modal-controller.model";
 
@@ -28,13 +28,10 @@ export class ProfileComponent extends ModalController implements OnInit {
     public updateButtonText: string = "Alterar dados";
     public cancelButtonText: string = "Desativar Usuário";
 
-    public userSession: User;
+    public userSession!: User;
 
     public passwordControl: FormControl;
 
-    private errors: any = {
-        wrong_password: "Senha incorreta!"
-    };
 
     constructor(
         private router: Router,
@@ -43,11 +40,17 @@ export class ProfileComponent extends ModalController implements OnInit {
         private _sessionService: SessionService
     ) {
         super();
-
-        this.userSession = this._sessionService.get();
-      
         this.profileForm = new FormGroup({});
         this.passwordControl = new FormControl('',[Validators.required]);
+
+        try{
+            this.userSession = this._sessionService.get();
+        }catch(err){
+            this._sessionService.destroy();
+            return;
+        }
+      
+       
 
         this.profileForm.addControl(
             "name",
@@ -62,19 +65,19 @@ export class ProfileComponent extends ModalController implements OnInit {
         );
         this.profileForm.addControl(
             "phone",
-            new FormControl(this.userSession.phone, [Validators.required])
+            new FormControl(this.userSession.phone, [Validators.required, Validators.minLength(11)])
         );
         this.profileForm.addControl(
             "birthDay",
-            new FormControl(this.userSession.birthdate.substring(0,2), [Validators.required])
+            new FormControl(this.userSession.birthdate.substring(0,2), [Validators.required, Validators.max(31), Validators.min(1)])
         );
         this.profileForm.addControl(
             "birthMonth",
-            new FormControl(this.userSession.birthdate.substring(3,5), [Validators.required])
+            new FormControl(this.userSession.birthdate.substring(3,5), [Validators.required, Validators.max(12), Validators.min(1)])
         );
         this.profileForm.addControl(
             "birthYear",
-            new FormControl(this.userSession.birthdate.substring(6), [Validators.required])
+            new FormControl(this.userSession.birthdate.substring(6), [Validators.required, Validators.max(new Date().getFullYear()), Validators.min(1)])
         );
         this.profileForm.disable();
     }
@@ -103,7 +106,8 @@ export class ProfileComponent extends ModalController implements OnInit {
                 label: "Telefone",
                 mask: "(00) 0 0000-0000",
                 errors: {
-                    required: "O campo é obrigatório"
+                    required: "O campo é obrigatório",
+                    minlength: "Telefone inválido"
                 }
             },
             {
@@ -111,7 +115,9 @@ export class ProfileComponent extends ModalController implements OnInit {
                 mask: "00",
                 label: "Dia",
                 errors: {
-                    required: "Obrigatório"
+                    required: "Obrigatório",
+                    min: "Dia inválido",
+                    max: "Dia inválido"
                 }
             },
             {
@@ -119,7 +125,9 @@ export class ProfileComponent extends ModalController implements OnInit {
                 mask: "00",
                 label: "Mês",
                 errors: {
-                    required: "Obrigatório"
+                    required: "Obrigatório",
+                    min: "Mês inválido",
+                    max: "Mês inválido"
                 }
             },
             {
@@ -127,7 +135,9 @@ export class ProfileComponent extends ModalController implements OnInit {
                 mask: "0000",
                 label: "Ano",
                 errors: {
-                    required: "Obrigatório"
+                    required: "Obrigatório",
+                    min: "Ano inválido",
+                    max: "Ano inválido"
                 }
             },{
                 type: "password",
@@ -165,8 +175,8 @@ export class ProfileComponent extends ModalController implements OnInit {
                 if (result.errors) {
                     this.isLoading.delete = false;
                     for (const error of result.errors) {
-                        if(error.message in this.errors){
-                            this.appComponent.showMessage(this.errors[error.message],"warning");
+                        if(error.message in ApiErrors){
+                            this.appComponent.showMessage(ApiErrors[error.message],"warning");
                         }else{
                             this.appComponent.showMessage("Falha ao atualizar usuário","error");
                         }
@@ -217,8 +227,8 @@ export class ProfileComponent extends ModalController implements OnInit {
             if (result.errors) {
                 this.isLoading.delete = false;
                 for (const error of result.errors) {
-                    if(error.message in this.errors){
-                        this.appComponent.showMessage(this.errors[error.message],"warning");
+                    if(error.message in ApiErrors){
+                        this.appComponent.showMessage(ApiErrors[error.message],"warning");
                     }else{
                         this.appComponent.showMessage("Falha ao deletar usuário","error");
                     }

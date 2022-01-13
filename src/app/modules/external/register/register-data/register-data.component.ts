@@ -9,7 +9,8 @@ import { Router } from "@angular/router";
 import { UserMutationService } from "src/app/core/services/user/mutation.services";
 import { User } from "src/app/core/models/user.model";
 import { Field } from "src/app/shared/components/input/models/field.model";
-import { UserQueryService } from "src/app/core/services/user/query.services";
+import { ApiErrors } from "src/app/core/errors/api-errors.error";
+import { AppComponent } from "src/app/app.component";
 
 @Component({
     selector: "app-register-data",
@@ -36,7 +37,8 @@ export class RegisterDataComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private userMutationService: UserMutationService
+        private userMutationService: UserMutationService,
+        private appComponent: AppComponent
     ) {
         this.registerForm = new FormGroup({});
         this.registerForm.addControl(
@@ -57,19 +59,19 @@ export class RegisterDataComponent implements OnInit {
         );
         this.registerForm.addControl(
             "phone",
-            new FormControl("", [Validators.required])
+            new FormControl("", [Validators.required, Validators.minLength(11)])
         );
         this.registerForm.addControl(
             "birthDay",
-            new FormControl("", [Validators.required])
+            new FormControl("", [Validators.required, Validators.max(31)])
         );
         this.registerForm.addControl(
             "birthMonth",
-            new FormControl("", [Validators.required])
+            new FormControl("", [Validators.required, Validators.max(12)])
         );
         this.registerForm.addControl(
             "birthYear",
-            new FormControl("", [Validators.required])
+            new FormControl("", [Validators.required, Validators.max(new Date().getFullYear())])
         );
         this.registerForm.addControl(
             "password",
@@ -136,7 +138,9 @@ export class RegisterDataComponent implements OnInit {
                 mask: "00",
                 label: "Dia",
                 errors: {
-                    required: "Obrigatório"
+                    required: "Obrigatório",
+                    min: "Dia inválido",
+                    max: "Dia inválido"
                 }
             },
             {
@@ -146,7 +150,9 @@ export class RegisterDataComponent implements OnInit {
                 mask: "00",
                 label: "Mês",
                 errors: {
-                    required: "Obrigatório"
+                    required: "Obrigatório",
+                    min: "Mês inválido",
+                    max: "Mês inválido"
                 }
             },
             {
@@ -156,7 +162,9 @@ export class RegisterDataComponent implements OnInit {
                 mask: "0000",
                 label: "Ano",
                 errors: {
-                    required: "Obrigatório"
+                    required: "Obrigatório",
+                    min: "Ano inválido",
+                    max: "Ano inválido"
                 }
             },
             {
@@ -231,7 +239,11 @@ export class RegisterDataComponent implements OnInit {
             .subscribe((response: any) => {
                 if (response.errors) {
                     for (const error of response.errors) {
-                        this.setError(user, error.message);
+                        if(error.message in ApiErrors){
+                            this.appComponent.showMessage(ApiErrors[error.message],"warning");
+                        }else{
+                            this.appComponent.showMessage("Falha ao criar usuário, tente novamente mais tarde","error");
+                        }
                     }
 
                     this.loading = false;
