@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
                     return;
                 }
             
-                this.createSession(result.data.login.token, value.email);
+                this.createSession(result.data.login.token, result.data.login.token);
             },(fail:HttpErrorResponse)=>{
                 this.loading =false;
                 this.appComponent.showMessage("Falha ao logar, tente novamente mais tarde","error");

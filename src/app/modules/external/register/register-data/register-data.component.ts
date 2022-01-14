@@ -42,11 +42,7 @@ export class RegisterDataComponent implements OnInit {
     ) {
         this.registerForm = new FormGroup({});
         this.registerForm.addControl(
-            "firstName",
-            new FormControl("", [Validators.required])
-        );
-        this.registerForm.addControl(
-            "secondName",
+            "name",
             new FormControl("", [Validators.required])
         );
         this.registerForm.addControl(
@@ -71,7 +67,7 @@ export class RegisterDataComponent implements OnInit {
         );
         this.registerForm.addControl(
             "birthYear",
-            new FormControl("", [Validators.required, Validators.max(new Date().getFullYear())])
+            new FormControl("", [Validators.required, Validators.max(new Date().getFullYear()-5)])
         );
         this.registerForm.addControl(
             "password",
@@ -99,14 +95,6 @@ export class RegisterDataComponent implements OnInit {
                 type: "text",
                 ignoreRequired: true,
                 label: "Nome",
-                errors: {
-                    required: "O campo é obrigatório"
-                }
-            },
-            {
-                type: "text",
-                ignoreRequired: true,
-                label: "Sobrenome",
                 errors: {
                     required: "O campo é obrigatório"
                 }
@@ -180,8 +168,7 @@ export class RegisterDataComponent implements OnInit {
 
     private get name() {
         return (
-            this.registerForm.value.firstName +
-            this.registerForm.value.secondName
+            this.registerForm.value.name
         );
     }
 

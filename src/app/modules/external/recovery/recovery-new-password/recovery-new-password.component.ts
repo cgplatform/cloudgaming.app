@@ -35,7 +35,7 @@ export class RecoveryNewPasswordComponent implements OnInit {
         private userMutationService: UserMutationService,
         private appComponent: AppComponent
     ) {
-        ApiErrors.invalid_token="SOlicite a redefinição de senha novamente!";
+        ApiErrors.invalid_token="Solicite a redefinição de senha novamente!";
         this.loginForm = new FormGroup({});
         this.loginForm.addControl(
             "passwordControl",

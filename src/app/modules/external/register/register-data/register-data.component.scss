@@ -27,15 +27,13 @@ h1 {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem 1.3rem;
     gap: 2rem 1.3rem;
-    grid-template-areas: "first-name second-name" "email email" "phone phone" "birth-date birth-date" "password password" "login auto";
+    grid-template-areas: "name-label name-label" "email email" "phone phone" "birth-date birth-date" "password password" "login auto";
 }
 
-.first-name {
-    grid-area: first-name;
+.name-label {
+    grid-area: name-label;
 }
-.second-name {
-    grid-area: second-name;
-}
+
 .email {
     grid-area: email;
 }
@@ -48,9 +46,14 @@ h1 {
 .log-in {
     grid-area: login;
 }
-.birth-date-container {
+.birthdate-container {
     grid-area: birth-date;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+}
+.birthdate-label{
+    grid-column: 1/-1;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
