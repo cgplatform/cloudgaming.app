@@ -20,21 +20,19 @@ export class LocalStorageService {
     }
 
     get(key: string) {
-        key = this.encrypt(key);
-
+        //key = this.encrypt(key);
         const chunk = localStorage.getItem(key);
         return chunk ? this.decrypt(chunk) : chunk;
     }
 
     set(key: string, value: string) {
-        key = this.encrypt(key);
+        //key = this.encrypt(key);
         value = this.encrypt(value);
-
         localStorage.setItem(key, value);
     }
 
     remove(key: string) {
-        key = this.encrypt(key);
+        //key = this.encrypt(key);
 
         localStorage.removeItem(key);
     }

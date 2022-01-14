@@ -27,6 +27,12 @@ import { ModalComponent } from "./modal/modal.component";
             validation: false
         })
     ],
-    exports: [AlertComponent, ButtonComponent, InputComponent, CardsComponent, ModalComponent]
+    exports: [
+        AlertComponent,
+        ButtonComponent,
+        InputComponent,
+        CardsComponent,
+        ModalComponent
+    ]
 })
 export class ComponentsModule {}

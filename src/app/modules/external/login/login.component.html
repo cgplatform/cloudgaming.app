@@ -1,5 +1,4 @@
-<s2p-alert (controller)="alertEvent($event)"></s2p-alert
-    >
+
 
 
 <div class="container">
@@ -9,12 +8,12 @@
             <s2p-input
                 class="email"
                 [field]="profileFormFields[0]"
-                [control]="getFormControl('emailControl')"
+                [control]="getFormControl('email')"
             ></s2p-input>
             <s2p-input
                 class="password"
                 [field]="profileFormFields[1]"
-                [control]="getFormControl('senhaControl')"
+                [control]="getFormControl('password')"
             ></s2p-input>
             <s2p-button
                 class="log-in"
@@ -27,7 +26,7 @@
             </s2p-button>
             <p class="createConta">
                 Ainda não possui uma conta?
-                <a href="/register/data">Registrar</a>
+                <a href="/register">Registrar</a>
             </p>
         </div>
     </div>

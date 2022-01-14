@@ -4,27 +4,36 @@
 @import "~@fortawesome/fontawesome-free/scss/regular.scss";
 
 
-.coming-soon{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 700px;
-    height: 500px;
-    margin: 0 auto;
-    padding:3rem 0 0 0;
-    border-radius: 8px;
-    background-color: $modal;
-    box-shadow: 3px 3px 10px rgba(78, 74, 242, 0.75), 10px 10px 4px rgba(0, 0, 0, 0.2);
-    h1{
-        font-size: 2rem;
-    }
-    i{
-        margin-top: 1rem;
-        font-size: 5rem;
-    }
-    img{
-        margin-bottom:35px;
-    }
+#cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem
 }
 
+
+// .coming-soon {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   width: 100%;
+//   max-width: 700px;
+//   height: 500px;
+//   margin: 0 auto;
+//   padding: 3rem 0 0 0;
+//   border-radius: 8px;
+//   background-color: $modal;
+//   box-shadow: 3px 3px 10px rgba(78, 74, 242, 0.75), 10px 10px 4px rgba(0, 0, 0, 0.2);
+
+//   h1 {
+//     font-size: 2rem;
+//   }
+
+//   i {
+//     margin-top: 1rem;
+//     font-size: 5rem;
+//   }
+
+//   img {
+//     margin-bottom: 35px;
+//   }
+// }

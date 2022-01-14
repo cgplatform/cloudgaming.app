@@ -2,52 +2,20 @@
     <div>
         <h3>CADASTRAR</h3>
         <div class="user-info-container">
-            <s2p-input
-                class="first-name"
-                [field]="registerFormFields[0]"
-                [control]="getFormControl('firstName')"
-            ></s2p-input>
-            <s2p-input
-                class="second-name"
-                [field]="registerFormFields[1]"
-                [control]="getFormControl('secondName')"
-            ></s2p-input>
-            <s2p-input
-                class="email"
-                [field]="registerFormFields[2]"
-                [control]="getFormControl('email')"
-            ></s2p-input>
-            <s2p-input
-                class="phone"
-                [field]="registerFormFields[3]"
-                [control]="getFormControl('phone')"
-            ></s2p-input>
-            <div class="birth-date-container">
-                <s2p-input
-                    [field]="registerFormFields[4]"
-                    [control]="getFormControl('birthDay')"
-                ></s2p-input>
-                <s2p-input
-                    [field]="registerFormFields[5]"
-                    [control]="getFormControl('birthMonth')"
-                ></s2p-input>
-                <s2p-input
-                    [field]="registerFormFields[6]"
-                    [control]="getFormControl('birthYear')"
-                ></s2p-input>
+            <s2p-input class="name-label" [field]="registerFormFields[0]" [control]="getFormControl('name')">
+            </s2p-input>
+            <s2p-input class="email" [field]="registerFormFields[1]" [control]="getFormControl('email')"></s2p-input>
+            <s2p-input class="phone" [field]="registerFormFields[2]" [control]="getFormControl('phone')"></s2p-input>
+            <div class="birthdate-container">
+                <label class="birthdate-label">Data de Nascimento</label>
+                <s2p-input [field]="registerFormFields[3]" [control]="getFormControl('birthDay')"></s2p-input>
+                <s2p-input [field]="registerFormFields[4]" [control]="getFormControl('birthMonth')"></s2p-input>
+                <s2p-input [field]="registerFormFields[5]" [control]="getFormControl('birthYear')"></s2p-input>
             </div>
-            <s2p-input
-                class="password"
-                [field]="registerFormFields[7]"
-                [control]="getFormControl('password')"
-            ></s2p-input>
-            <s2p-button
-                class="register-in"
-                [isLoading]="loading"
-                color="blue"
-                (click)="buttonClick()"
-                posfix="fas fa-arrow-right"
-            >
+            <s2p-input class="password" [field]="registerFormFields[6]" [control]="getFormControl('password')">
+            </s2p-input>
+            <s2p-button class="register-in" [isLoading]="loading" color="blue" (click)="buttonClick()"
+                posfix="fas fa-arrow-right">
                 Cadastrar
             </s2p-button>
         </div>

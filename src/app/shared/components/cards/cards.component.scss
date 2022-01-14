@@ -1,58 +1,94 @@
 @import "../../../../assets/scss/variables.scss";
+
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/solid.scss";
 @import "~@fortawesome/fontawesome-free/scss/regular.scss";
 
-.carousel {
+#cards {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    grid-gap: 2rem;
+    flex-wrap: wrap;
 }
 
-.backgroundImg {
-    background-image: var(--imagem);
+.card {
+    display: flex;
+    flex-direction: column;
+    
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.4) 100%) , var(--imagem);
+
     box-shadow: 0px 20px 35px $card-shadow;
     border-radius: 8px;
-    margin: 10px;
+
+    background-size: cover;
+
     .text {
-        font-size: larger;
-        color: $font-color-highlighted;
-        position: relative;
-        top: 70%;
-        left: 8%;
+        width: 100%;
+        height: 40px;
+
+        color: #eaeaea;
+        font-size: 1.2rem;
+    
+        margin-top: auto;
     }
+
     .circle {
+        width: 50px;
+        height: 50px;
+
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 52.36px;
-        height: 56.09px;
+
         border-radius: 50%;
-        background: rgba(75, 93, 241, 0.6);
         position: relative;
-        filter: drop-shadow(0px 20px 20px rgba(0, 0, 0, 0.300754));
         cursor: pointer;
-        i {
-            padding: 0 10px;
+
+        background: rgba(75, 93, 241, 0.6);
+        filter: drop-shadow(0px 20px 20px rgba(0, 0, 0, 0.300754));
+
+        i.play {
+            opacity: 0.9;
+
             color: rgba(255, 255, 255, 0.9);
+
+            @extend %fa-icon;
+            @extend .fas;
+          
+            &:before {
+              content: fa-content($fa-var-play);
+            }
+
+            margin-top: 0.2rem;
+            margin-left: 0.2rem;
         }
     }
 }
 
-.portrait {
-    width: 247.39px;
-    height: 304px;
+.landscape {
+    padding: 1rem 1.5rem;
+
+    flex-direction: row-reverse;
+
+    width: calc(472px - 3rem);
+    height: calc(200px - 2rem);
+
     .circle {
-        bottom: 9.1%;
-        left: 70%;
+        margin-top: auto;
+        margin-left: auto;
+    }
+
+    .text {
+        text-align: bottom;
     }
 }
 
-.landscape {
-    height: 291px;
-    width: 517.93px;
+.portrait {
+    padding: 1.5rem;
+
+    width: calc(170px - 3rem);
+    height: calc(250px - 3rem);
+
     .circle {
-        top: 53%;
-        left: 85%;
+        margin-left: auto;
     }
 }

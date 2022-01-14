@@ -41,7 +41,6 @@ export class InputComponent implements OnInit {
         const inputs = wrapper.getElementsByTagName("input");
         const input = inputs[0];
 
-        console.log(inputs);
 
         if (input) {
             input.focus();

@@ -2,10 +2,11 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { AppComponent } from "src/app/app.component";
+import { ApiErrors } from "src/app/core/errors/api-errors.error";
 import { User } from "src/app/core/models/user.model";
 import { SessionService } from "src/app/core/services/session.service";
 import { UserMutationService } from "src/app/core/services/user/mutation.services";
-import { AlertComponent } from "src/app/shared/components/alert/alert.component";
 import { Field } from "src/app/shared/components/input/models/field.model";
 import { ModalController } from "src/app/shared/components/modal/models/modal-controller.model";
 
@@ -27,31 +28,29 @@ export class ProfileComponent extends ModalController implements OnInit {
     public updateButtonText: string = "Alterar dados";
     public cancelButtonText: string = "Desativar Usuário";
 
-    public userSession={
-        name: "Luiz",
-        birthdate: "11/01/2001",
-        email:"bah",
-        phone: "31989293599"
-    };
+    public userSession!: User;
 
     public passwordControl: FormControl;
 
-    public alert: AlertComponent | undefined;
 
     constructor(
         private router: Router,
-       
-        private _userMutationService: UserMutationService
+        private appComponent: AppComponent,
+        private _userMutationService: UserMutationService,
+        private _sessionService: SessionService
     ) {
         super();
-      
         this.profileForm = new FormGroup({});
         this.passwordControl = new FormControl('',[Validators.required]);
 
-        if(!this.userSession){
-            this.router.navigate(['']);
+        try{
+            this.userSession = this._sessionService.get();
+        }catch(err){
+            this._sessionService.destroy();
             return;
         }
+      
+       
 
         this.profileForm.addControl(
             "name",
@@ -66,19 +65,19 @@ export class ProfileComponent extends ModalController implements OnInit {
         );
         this.profileForm.addControl(
             "phone",
-            new FormControl(this.userSession.phone, [Validators.required])
+            new FormControl(this.userSession.phone, [Validators.required, Validators.minLength(11)])
         );
         this.profileForm.addControl(
             "birthDay",
-            new FormControl(this.userSession.birthdate.substring(0,2), [Validators.required])
+            new FormControl(this.userSession.birthdate.substring(0,2), [Validators.required, Validators.max(31), Validators.min(1)])
         );
         this.profileForm.addControl(
             "birthMonth",
-            new FormControl(this.userSession.birthdate.substring(3,5), [Validators.required])
+            new FormControl(this.userSession.birthdate.substring(3,5), [Validators.required, Validators.max(12), Validators.min(1)])
         );
         this.profileForm.addControl(
             "birthYear",
-            new FormControl(this.userSession.birthdate.substring(6), [Validators.required])
+            new FormControl(this.userSession.birthdate.substring(6), [Validators.required, Validators.max(new Date().getFullYear()), Validators.min(1)])
         );
         this.profileForm.disable();
     }
@@ -107,7 +106,8 @@ export class ProfileComponent extends ModalController implements OnInit {
                 label: "Telefone",
                 mask: "(00) 0 0000-0000",
                 errors: {
-                    required: "O campo é obrigatório"
+                    required: "O campo é obrigatório",
+                    minlength: "Telefone inválido"
                 }
             },
             {
@@ -115,7 +115,9 @@ export class ProfileComponent extends ModalController implements OnInit {
                 mask: "00",
                 label: "Dia",
                 errors: {
-                    required: "Obrigatório"
+                    required: "Obrigatório",
+                    min: "Dia inválido",
+                    max: "Dia inválido"
                 }
             },
             {
@@ -123,7 +125,9 @@ export class ProfileComponent extends ModalController implements OnInit {
                 mask: "00",
                 label: "Mês",
                 errors: {
-                    required: "Obrigatório"
+                    required: "Obrigatório",
+                    min: "Mês inválido",
+                    max: "Mês inválido"
                 }
             },
             {
@@ -131,7 +135,9 @@ export class ProfileComponent extends ModalController implements OnInit {
                 mask: "0000",
                 label: "Ano",
                 errors: {
-                    required: "Obrigatório"
+                    required: "Obrigatório",
+                    min: "Ano inválido",
+                    max: "Ano inválido"
                 }
             },{
                 type: "password",
@@ -143,9 +149,7 @@ export class ProfileComponent extends ModalController implements OnInit {
         ];
     }
 
-    public alertEvent(event: {instance: AlertComponent}){
-        this.alert=event.instance;
-    }
+  
 
 
     public update() {
@@ -155,6 +159,7 @@ export class ProfileComponent extends ModalController implements OnInit {
             this.cancelButtonText = "Cancelar";
         } else {
             if(this.profileForm.invalid){
+                this.appComponent.showMessage("Há campos mal preenchidos", "warning");
                 return;
             }
             this.isLoading.update=true;
@@ -165,12 +170,29 @@ export class ProfileComponent extends ModalController implements OnInit {
                 email: updatedUser.email,
                 phone: updatedUser.phone,
             }
-            const fields = ["name"]
+            const fields = ["name","phone","birthdate","email","verified"]
             this._userMutationService.updateBy(fixedDate,fields).subscribe((result:any)=>{
-                this.alert?.showMessage("Usuário atualizado com sucesso", "success");
+                if (result.errors) {
+                    this.isLoading.delete = false;
+                    for (const error of result.errors) {
+                        if(error.message in ApiErrors){
+                            this.appComponent.showMessage(ApiErrors[error.message],"warning");
+                        }else{
+                            this.appComponent.showMessage("Falha ao atualizar usuário","error");
+                        }
+                    }
+                    return;
+                }
+                this.appComponent.showMessage("Usuário atualizado com sucesso", "success");
+                const updatedUser = result.data.updateBy;
+                updatedUser.token = this.userSession.token;
+                this._sessionService.set(updatedUser);
                 this.isLoading.update=false;
+                this.profileForm.disable();
+                this.updateButtonText = "Alterar dados";
+                this.cancelButtonText = "Desativar Usuário";
             },(fail:HttpErrorResponse)=>{
-                this.alert?.showMessage("Falha ao atualizar usuário", "error");
+                this.appComponent.showMessage("Falha ao atualizar usuário", "error");
                 this.isLoading.update=false;
             });
         }
@@ -182,26 +204,49 @@ export class ProfileComponent extends ModalController implements OnInit {
             this.openModal("modalPassword");
         } else {
             this.profileForm.disable();
+            this.resetUser();
             this.updateButtonText = "Alterar dados";
             this.cancelButtonText = "Desativar Usuário";
         }
     }
 
-    removeUser(){
+    public resetUser(){
+        this.profileForm.setValue({
+            name: this.userSession.name,
+            email: this.userSession.email,
+            phone: this.userSession.phone,
+            birthDay: this.userSession.birthdate.substring(0,2),
+            birthMonth: this.userSession.birthdate.substring(3,5),
+            birthYear: this.userSession.birthdate.substring(6)
+        })
+    }
+
+    public removeUser(){
         this.isLoading.delete=true;
-        this._userMutationService.delete(this.passwordControl.value).subscribe((resul:any)=>{
-            this.router.navigate(['']);
+        this._userMutationService.delete(this.passwordControl.value).subscribe((result:any)=>{
+            if (result.errors) {
+                this.isLoading.delete = false;
+                for (const error of result.errors) {
+                    if(error.message in ApiErrors){
+                        this.appComponent.showMessage(ApiErrors[error.message],"warning");
+                    }else{
+                        this.appComponent.showMessage("Falha ao deletar usuário","error");
+                    }
+                }
+                return;
+            }
+            this._sessionService.destroy();
             this.isLoading.delete=false;
             this.closeModal("modalPassword");
         },(fail:HttpErrorResponse)=>{
-            if(fail.message==="wrong_password"){
-                this.alert?.showMessage("Senha incorreta", "error");
-                
-            }
-            this.alert?.showMessage("Falha ao deletar usuário", "error");
+            this.appComponent.showMessage("Falha ao deletar usuário", "error");
             this.isLoading.delete=false;
             this.closeModal("modalPassword");
         })
+    }
+
+    public logOut(){
+        this._sessionService.destroy();
     }
 
     //Methods to use only in tha HTML

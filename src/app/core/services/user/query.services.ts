@@ -27,9 +27,8 @@ export class UserQueryService {
                     required: true
                 }
             },
-            fields: ["token","id"]
+            fields: ["token","email"]
         });
-
         return this.http.post(this.host, query);
     }
 
@@ -47,12 +46,12 @@ export class UserQueryService {
         const query = gql.query({
             operation: "emailConfirmation",
             variables:{
-                Token: {
+                token: {
                     value: token,
                     required: true
                 }
             },
-            fields: ["token"]
+            fields: ["token","email"]
         });
 
         return this.http.post(this.host, query);

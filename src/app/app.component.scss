@@ -1,5 +1,9 @@
 @import "../assets/scss/variables.scss";
 
+:host {
+    height: 100%;
+}
+
 .container {
     background: $background-color;
     height: 100vh;

@@ -2,10 +2,11 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { AppComponent } from "src/app/app.component";
 import { SessionService } from "src/app/core/services/session.service";
 import { UserQueryService } from "src/app/core/services/user/query.services";
-import { AlertComponent } from "src/app/shared/components/alert/alert.component";
 import { Field } from "src/app/shared/components/input/models/field.model";
+import { ApiErrors } from "src/app/core/errors/api-errors.error";
 
 @Component({
     selector: "app-login",
@@ -18,20 +19,20 @@ export class LoginComponent implements OnInit {
 
     public loading: boolean = false;
 
-    public alert: AlertComponent | undefined;
 
     constructor(
             private router: Router,
             private _userQueryService: UserQueryService,
-            private _sessionService: SessionService
+            private _sessionService: SessionService,
+            private appComponent: AppComponent
         ) {
         this.loginForm = new FormGroup({});
         this.loginForm.addControl(
-            "emailControl",
+            "email",
             new FormControl("", [Validators.required, Validators.email])
         );
         this.loginForm.addControl(
-            "senhaControl",
+            "password",
             new FormControl("", [Validators.required])
         );
     }
@@ -62,10 +63,6 @@ export class LoginComponent implements OnInit {
         ];
     }
 
-    public alertEvent(event:{instance: AlertComponent}){
-        this.alert=event.instance;
-    }
-
     public getFormControl(field: string) {
         return this.loginForm.get(field) as FormControl;
     }
@@ -73,46 +70,66 @@ export class LoginComponent implements OnInit {
     loggIn() {
         if (this.loginForm.valid) {
             this.loading =true;
-            const value = this.loginForm.value
+            const value = this.loginForm.value;
             this._userQueryService.login(value.email, value.password).subscribe((result:any)=>{
-                const token = result.data.token;
-                const id = result.data.id;
-                this.createSession(token, id);
-            },(fail:HttpErrorResponse)=>{
-                if(fail.message==="email_or_password"){
-                    this.alert?.showMessage("Email ou senha inválidos","warning");
-                    this.loading =false;
-                    return
+                if (result.errors) {
+                    this.loading = false;
+                    for (const error of result.errors) {
+                        if(error.message in ApiErrors){
+                            this.appComponent.showMessage(ApiErrors[error.message],"warning");
+                        }else{
+                            this.appComponent.showMessage("Falha ao efetuar login, tente novamente mais tarde","error");
+                        }
+                    }
+                    return;
                 }
+            
+                this.createSession(result.data.login.token, result.data.login.email);
+            },(fail:HttpErrorResponse)=>{
                 this.loading =false;
-
-                this.alert?.showMessage("Falha ao loggar","error");
+                this.appComponent.showMessage("Falha ao logar, tente novamente mais tarde","error");
             })
         } else{
-            this.alert?.showMessage("Os campos devem ser devidamente preenchidos!", "warning")
+            this.appComponent.showMessage("Preencha os campos corretamente","warning");
+
         }
     }
 
-    createSession(token: string, id:string){
+    createSession(token: string, email:string){
         const temporaryUser = {
             name:"default",
             birthdate: "default",
             phone: "dafualt",
             email:"default",
-            token:token
+            token: token
         }
         this._sessionService.set(temporaryUser);
+        const variables = {
+            email:{
+                value: email,
+                required:false
+            }
+        }
         const fields = ["name","email","phone","birthdate","id","verified"]
-        this._userQueryService.filterBy({id:{id}},fields).subscribe((result:any)=>{
-            this._sessionService.set(result.data);
-            this.router.navigate(['']);
+        this._userQueryService.filterBy(variables,fields).subscribe((result:any)=>{
+            if (result.errors) {
+                this.loading = false;
+                for (const error of result.errors) {
+                    this.appComponent.showMessage("Falha ao criar sessão, tente novamente mais tarde","error");
+                }
+                this._sessionService.destroy();
+                return;
+            }
+            const user = result.data.filterBy[0];
+            user.token = token;
+            this._sessionService.set(user);
+            this.router.navigate(['/']);
             this.loading =false;
 
         },(fail:HttpErrorResponse)=>{
-            this.alert?.showMessage("Falha ao loggar","error");
+            this.appComponent.showMessage("Falha ao criar sessão, tente novamente mais tarde","error");
             this._sessionService.destroy();
             this.loading =false;
-
         })
     }
 

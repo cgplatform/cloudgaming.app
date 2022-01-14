@@ -1,8 +1,12 @@
-<s2p-alert (controller)="alertEvent($event)"></s2p-alert
->
 <div class="container">
     <div>
-        <h3>DETALHES DO USUÁRIO</h3>
+        <div class="header">
+            <h3>DETALHES DO USUÁRIO</h3>
+            <div (click)="logOut()">
+                Sair
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+        </div>
         <div class="user-info-container">
             <s2p-input class="name" [field]="profileFormFields[0]" [control]="getFormControl('name')"></s2p-input>
             <s2p-input class="email" [field]="profileFormFields[1]" [control]="getFormControl('email')"></s2p-input>

@@ -1,11 +1,13 @@
 <div id="main-container">
-    <div class="header">
-        <div class="logo" (click)="home()"></div>
-        <h2 class="profile" (click)="profileAction()"><i class="fas fa-user-circle"></i>{{user ? user.name : 'Entrar'}}</h2>
-    </div>
     <div id="internal-components">
-        <router-outlet></router-outlet>  
+        <div id="header">
+            <div class="logo" (click)="home()"></div>
+            <h2 class="profile" (click)="profileAction()">
+                <i class="fas fa-user-circle"></i>{{user ? user.name : 'Entrar'}}
+            </h2>
+        </div>
+        <div id="body-wrapper">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>
-
-

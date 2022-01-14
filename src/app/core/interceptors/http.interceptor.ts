@@ -21,11 +21,9 @@ export class HttpInterceptorService implements HttpInterceptor {
         request: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-        console.log("INTERCEPTOR");
 
         try {
             const user = this.sessionService.get();
-
             if (!request.headers.has("Token")) {
                 request = request.clone({
                     headers: request.headers.set("Token", user.token!)
@@ -36,7 +34,7 @@ export class HttpInterceptorService implements HttpInterceptor {
                 tap((data: any) => {
                     if (data.body && data.body.errors) {
                         for (const error of data.body.errors) {
-                            if (error.message == "not authorized") {
+                            if (error.message == "not_authorized") {
                                 this.sessionService.destroy();
                             }
                         }
@@ -46,8 +44,8 @@ export class HttpInterceptorService implements HttpInterceptor {
                     if (fail.status === 401) {
                         this.sessionService.destroy();
                     }
-
                     return throwError(fail);
+                    
                 })
             );
         }

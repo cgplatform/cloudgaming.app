@@ -15,6 +15,6 @@ export class RegisterConfirmationComponent implements OnInit {
 
     public confirmation() {
         //TODO alterar rota
-        this.router.navigate(["/profile"]);
+        this.router.navigate(["/"]);
     }
 }
