@@ -7,5 +7,5 @@ export const ApiErrors: any = {
         email_or_password_invalid: "Email ou senha inválidos!",
         repeat_email: "O email escolhido já existe!",
         wrong_password: "Senha incorreta!",
-        user_not_verified: "O seu email não foi verificado. Entre em seu email e siga os passos lá passados"
+        user_not_verified: "O seu email não foi verificado. Entre em seu email e siga os passos"
 }

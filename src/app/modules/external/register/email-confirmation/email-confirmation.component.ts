@@ -34,7 +34,6 @@ export class EmailConfirmationComponent implements OnInit {
     }
 
     private verifyAccount() {
-        console.log(this.params)
         if (!this.params.token) {
             return;
         }
@@ -52,9 +51,7 @@ export class EmailConfirmationComponent implements OnInit {
                     }
                     return;
                 }
-                console.log(response)
-                const token = response.emailConfirmation.token;
-                const email = response.emailConfirmation.email;
+                const {token, email} = response.data.emailConfirmation;
                 this.createSession(token, email);
             },(fail:any)=>{
                 this.appComponent.showMessage("Falha ao confirmar e-mail, tente novamente mais tarde","error");
@@ -88,6 +85,7 @@ export class EmailConfirmationComponent implements OnInit {
             const user = result.data.filterBy[0];
             user.token = token;
             this._sessionService.set(user);
+            this.appComponent.showMessage("Email verificado com sucesso","success");
             this.router.navigate(["/"])
 
         },(fail:HttpErrorResponse)=>{

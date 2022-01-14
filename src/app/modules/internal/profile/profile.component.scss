@@ -10,6 +10,19 @@
     justify-items: center;
 }
 
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    div{
+        cursor: pointer;
+        i{
+            margin-left: 0.2rem;
+        }
+    }
+}
+
 h1{
     color: $font-color-main;
 }
