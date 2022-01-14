@@ -245,6 +245,10 @@ export class ProfileComponent extends ModalController implements OnInit {
         })
     }
 
+    public logOut(){
+        this._sessionService.destroy();
+    }
+
     //Methods to use only in tha HTML
     public getFormControl(field: string) {
         return this.profileForm.get(field) as FormControl;
