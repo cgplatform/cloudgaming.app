@@ -19,8 +19,13 @@ h1 {
     margin-top: 2rem;
     display: grid;
     grid-template-columns: 1fr 0.4fr;
-    gap: 1.3rem;
     grid-template-areas: "email email" "password password" "login auto" "createConta createConta";
+
+    gap: 1.8rem;
+
+    s2p-button {
+        max-width: 150px;
+    }
 }
 
 .email {

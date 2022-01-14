@@ -4,39 +4,33 @@ import { User } from "src/app/core/models/user.model";
 import { SessionService } from "src/app/core/services/session.service";
 
 @Component({
-    selector: "app-internal",
     templateUrl: "./internal.component.html",
-    styleUrls: ["./internal.component.scss"]
+    styleUrls: ["../../../assets/scss/layout.scss", "./internal.component.scss"]
 })
 export class InternalComponent implements OnInit {
-    
     public user: User | undefined;
 
     constructor(
         private router: Router,
         private _sessionService: SessionService
     ) {
-        try{
+        try {
             this._sessionService.refresh();
             this.user = this._sessionService.get();
-        }catch(e){
-
-        }
+        } catch (e) {}
     }
 
-    ngOnInit(): void {
+    ngOnInit(): void {}
 
-    }
-
-    public profileAction(){
-        if(this.user){
+    public profileAction() {
+        if (this.user) {
             this.router.navigate(["/profile"]);
-        }else{
+        } else {
             this.router.navigate(["/login"]);
         }
     }
 
-    public home(){
+    public home() {
         this.router.navigate([""]);
     }
 }

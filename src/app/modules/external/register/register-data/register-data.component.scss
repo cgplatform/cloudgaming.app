@@ -28,6 +28,10 @@ h1 {
     grid-gap: 2rem 1.3rem;
     gap: 2rem 1.3rem;
     grid-template-areas: "name-label name-label" "email email" "phone phone" "birth-date birth-date" "password password" "login auto";
+
+    s2p-button {
+        max-width: 150px;
+    }
 }
 
 .name-label {

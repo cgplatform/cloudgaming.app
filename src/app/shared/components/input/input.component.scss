@@ -310,6 +310,7 @@ select {
 
     /*Link não visitado */
     & a:link {
+        color: $font-color-interactive;
         text-decoration: none;
     }
 
