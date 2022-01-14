@@ -35,7 +35,7 @@ h1{
     display:grid;
     grid-template-columns: repeat(2,1fr);
     gap: 1.3rem;
-    grid-template-areas: "name name" "email email" "phone phone" "birth-date birth-date" "update cancel";
+    grid-template-areas: "name name" "email email" "phone phone" "birth-date birth-date";
 }
 
 .name{

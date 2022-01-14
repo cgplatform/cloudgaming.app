@@ -25,7 +25,7 @@ export class ProfileComponent extends ModalController implements OnInit {
         update: false
     };
 
-    public updateButtonText: string = "Alterar dados";
+    public updateButtonText: string = "Editar perfil";
     public cancelButtonText: string = "Desativar Usuário";
 
     public userSession!: User;
@@ -189,7 +189,7 @@ export class ProfileComponent extends ModalController implements OnInit {
                 this._sessionService.set(updatedUser);
                 this.isLoading.update=false;
                 this.profileForm.disable();
-                this.updateButtonText = "Alterar dados";
+                this.updateButtonText = "Editar Perfil";
                 this.cancelButtonText = "Desativar Usuário";
             },(fail:HttpErrorResponse)=>{
                 this.appComponent.showMessage("Falha ao atualizar usuário", "error");
@@ -205,7 +205,7 @@ export class ProfileComponent extends ModalController implements OnInit {
         } else {
             this.profileForm.disable();
             this.resetUser();
-            this.updateButtonText = "Alterar dados";
+            this.updateButtonText = "Editar Perfil";
             this.cancelButtonText = "Desativar Usuário";
         }
     }
