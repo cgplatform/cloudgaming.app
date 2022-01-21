@@ -7,17 +7,7 @@
                 <i class="fas fa-sign-out-alt"></i>
             </div>
         </div>
-        <div class="user-info-container" *ngIf="profileForm.disabled">
-            <label class="name">{{userSession.name}}</label>
-            <label class="email">{{userSession.email}}</label>
-            <label class="phone">{{userSession.phone}}</label>
-            <div class="birth-date-container">
-                <label>{{userSession.birthdate.substring(0,2)}}</label>
-                <label>{{userSession.birthdate.substring(3,5)}}</label>
-                <label>{{userSession.birthdate.substring(6)}}</label>
-            </div>
-        </div>
-        <div class="user-info-container" *ngIf="profileForm.enabled">
+        <div class="user-info-container">
             <s2p-input class="name" [field]="profileFormFields[0]" [control]="getFormControl('name')"></s2p-input>
             <s2p-input class="email" [field]="profileFormFields[1]" [control]="getFormControl('email')"></s2p-input>
             <s2p-input class="phone" [field]="profileFormFields[2]" [control]="getFormControl('phone')"></s2p-input>
@@ -26,11 +16,11 @@
                 <s2p-input [field]="profileFormFields[4]" [control]="getFormControl('birthMonth')"></s2p-input>
                 <s2p-input [field]="profileFormFields[5]" [control]="getFormControl('birthYear')"></s2p-input>
             </div>
+            <s2p-button [isLoading]="isLoading.update" color="update blue" (click)="update()">
+                {{updateButtonText}}</s2p-button>
+            <s2p-button  color="cancel red" (click)="cancel()">
+                {{cancelButtonText}}</s2p-button>
         </div>
-        <s2p-button [isLoading]="isLoading.update" color="update blue" (click)="update()">
-            {{updateButtonText}}</s2p-button>
-        <s2p-button  color="cancel red" (click)="cancel()">
-            {{cancelButtonText}}</s2p-button>
     </div>
     <div>
         <img src="../../../../assets/images/characters/Killjoy.png" width= "350px" height="550px">

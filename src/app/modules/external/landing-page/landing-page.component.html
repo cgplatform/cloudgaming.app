@@ -1,4 +1,18 @@
 <div id="cards">
-    <s2p-cards [imgPaths]="arrayCardsPortrait" type="portrait"></s2p-cards>
-    <s2p-cards [imgPaths]="arrayCardsLandscape" type="landscape"></s2p-cards>
+    <s2p-cards [imgPaths]="hlPaths" type="portrait" title="Em Alta" (startIcon)="cardEvent($event, hlGames)"></s2p-cards>
+    <s2p-cards [imgPaths]="hsPaths" type="landscape" title="Hack and Slash" (startIcon)="cardEvent($event, hsGames)"></s2p-cards>
+    <s2p-cards [imgPaths]="fpsPaths" type="landscape" (startIcon)="cardEvent($event,fpsGames)" title="FPS"></s2p-cards>
 </div>
+
+
+<s2p-modal id="modalStartGame" (controller)="modalEvent($event)">
+   <div class="game-description">
+        <div class="image-container">
+            <img [src]="currentGame?.poster" width=100% height=100%>
+        </div>
+        <div class="description">
+            <h2>{{currentGame?.game.name}}</h2>
+            <p>{{currentGame?.game.description}}</p>
+        </div>
+   </div>
+</s2p-modal>

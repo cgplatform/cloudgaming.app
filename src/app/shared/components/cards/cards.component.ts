@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
     styleUrls: ["./cards.component.scss"]
 })
 export class CardsComponent implements OnInit {
+    
     @Input()
     public type: string = "portrait";
 
@@ -20,16 +21,19 @@ export class CardsComponent implements OnInit {
     @Input()
     public play: string = "";
 
+    @Input()
+    public title: string = "";
+
     @Output()
-    public iconeStart: EventEmitter<{}>;
+    public startIcon: EventEmitter<{}>;
 
     constructor() {
-        this.iconeStart = new EventEmitter();
+        this.startIcon = new EventEmitter();
     }
 
     ngOnInit(): void {}
 
-    clickPlay() {
-        this.iconeStart.emit("Clicou no Play");
+    clickPlay(index:number) {
+        this.startIcon.emit(index);
     }
 }
