@@ -1,10 +1,14 @@
-<div id="cards">
-    <div *ngFor="let img of imgPaths" [ngClass]="type" class="card" style="--imagem: url({{ img.path }}) ">
-        <div class="circle" (click)="clickPlay()">
-            <i class="play"></i>
-        </div>
-        <div class="text">
-            {{ img.name }}
+<div>
+    <h2>{{title}}</h2>
+    <div id="cards">
+        <div *ngFor="let img of imgPaths; let index = index" [ngClass]="type" class="card" style="--imagem: url({{ img.path }}) ">
+            <div class="circle" (click)="clickPlay(index)">
+                <i class="play"></i>
+            </div>
+            <div class="text">
+                {{ img.name }}
+            </div>
         </div>
     </div>
 </div>
+

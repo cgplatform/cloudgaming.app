@@ -8,6 +8,11 @@
     display: flex;
     grid-gap: 2rem;
     flex-wrap: wrap;
+
+}
+
+:host{
+    z-index: 10;
 }
 
 .card {
