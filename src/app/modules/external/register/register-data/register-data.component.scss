@@ -4,60 +4,75 @@
 @import "../../../../../assets/scss/variables.scss";
 
 .container {
-    display: grid;
-    grid-template-columns: 0.7fr 1fr;
-    justify-items: center;
+  display: grid;
+  grid-template-columns: 0.7fr 1fr;
+  justify-items: center;
 }
 
 .image {
-    background-image: url(../../../../../assets/images/characters/banana.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    width: 22rem;
-    height: 100%;
+  background-image: url(../../../../../assets/images/characters/banana.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 22rem;
+  height: 100%;
 }
 
 h1 {
-    color: $font-color-main;
+  color: $font-color-main;
 }
 
 .user-info-container {
-    margin-top: 2rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 2rem 1.3rem;
-    gap: 2rem 1.3rem;
-    grid-template-areas: "name-label name-label" "email email" "phone phone" "birth-date birth-date" "password password" "login auto";
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2rem 1.3rem;
+  gap: 2rem 1.3rem;
+  grid-template-areas: "name-label name-label""email email""phone phone""birth-date birth-date""password password""login auto";
 
-    s2p-button {
-        max-width: 150px;
-    }
+  s2p-button {
+    max-width: 150px;
+  }
 }
 
 .name-label {
-    grid-area: name-label;
+  grid-area: name-label;
 }
 
 .email {
-    grid-area: email;
+  grid-area: email;
 }
+
 .phone {
-    grid-area: phone;
+  grid-area: phone;
 }
+
 .password {
-    grid-area: password;
+  grid-area: password;
 }
+
 .log-in {
-    grid-area: login;
+  grid-area: login;
 }
+
 .birthdate-container {
-    grid-area: birth-date;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+  grid-area: birth-date;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
 }
-.birthdate-label{
-    grid-column: 1/-1;
-    font-weight: bold;
-    font-size: 1.2rem;
+
+.birthdate-label {
+  grid-column: 1/-1;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 800px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .image {
+    display: none;
+  }
 }
