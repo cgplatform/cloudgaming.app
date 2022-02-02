@@ -8,7 +8,7 @@
     display: grid;
     grid-template-columns: 0.70fr 1fr;
     justify-items: center;
-    height: 100%;
+    height: calc(100vh - 55px - 6.5rem);
 }
 
 .information{

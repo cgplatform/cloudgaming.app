@@ -97,3 +97,11 @@
         margin-left: auto;
     }
 }
+
+
+@media (max-width: 550px){
+    .landscape {
+        width: calc(372px - 3rem);
+        height: calc(200px - 2rem);
+    }
+}
