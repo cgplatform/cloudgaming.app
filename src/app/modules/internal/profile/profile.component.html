@@ -1,5 +1,5 @@
 <div class="container">
-    <div>
+    <div class="information">
         <div class="header">
             <h3>DETALHES DO USUÁRIO</h3>
             <div (click)="logOut()">
@@ -16,14 +16,16 @@
                 <s2p-input [field]="profileFormFields[4]" [control]="getFormControl('birthMonth')"></s2p-input>
                 <s2p-input [field]="profileFormFields[5]" [control]="getFormControl('birthYear')"></s2p-input>
             </div>
+        </div>
+        <div class="footer-buttons">
             <s2p-button [isLoading]="isLoading.update" color="update blue" (click)="update()">
                 {{updateButtonText}}</s2p-button>
             <s2p-button  color="cancel red" (click)="cancel()">
                 {{cancelButtonText}}</s2p-button>
         </div>
     </div>
-    <div>
-        <img src="../../../../assets/images/characters/Killjoy.png" width= "350px" height="550px">
+    <div class="image">
+        <img src="../../../../assets/images/characters/Killjoy.png" >
     </div>
 </div>
 
