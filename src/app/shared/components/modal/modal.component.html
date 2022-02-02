@@ -1,6 +1,7 @@
 <div [id]="id" class="modal-overlay" [ngClass]="modalClasses">
     <div class="modal-wrapper">
         <div class="body">
+            <div class="close" (click)="close()"></div>
             <div class="content">
                 <ng-content></ng-content>
             </div>
