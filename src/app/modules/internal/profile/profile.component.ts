@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AppComponent } from "src/app/app.component";
 import { ApiErrors } from "src/app/core/errors/api-errors.error";
@@ -31,6 +31,8 @@ export class ProfileComponent extends ModalController implements OnInit {
     public userSession!: User;
 
     public passwordControl: FormControl;
+    public confirWordControl: FormControl;
+
 
 
     constructor(
@@ -42,6 +44,8 @@ export class ProfileComponent extends ModalController implements OnInit {
         super();
         this.profileForm = new FormGroup({});
         this.passwordControl = new FormControl('',[Validators.required]);
+        this.confirWordControl = new FormControl('',[Validators.required, this.validatorEqual]);
+
 
         try{
             this.userSession = this._sessionService.get();
@@ -145,6 +149,13 @@ export class ProfileComponent extends ModalController implements OnInit {
                 errors: {
                     required: "Obrigatório"
                 }
+            },{
+                type: "text",
+                label: "Digite a seguinte palavra: Start2Play",
+                errors: {
+                    required: "Obrigatório",
+                    notEqual: "Palavra incorreta"
+                }
             }
         ];
     }
@@ -223,6 +234,12 @@ export class ProfileComponent extends ModalController implements OnInit {
 
     public removeUser(){
         this.isLoading.delete=true;
+        if(this.passwordControl.invalid || this.confirWordControl.invalid){
+            this.passwordControl.markAsTouched();
+            this.confirWordControl.markAsTouched();
+            this.isLoading.delete=false;
+            return;
+        }
         this._userMutationService.delete(this.passwordControl.value).subscribe((result:any)=>{
             if (result.errors) {
                 this.isLoading.delete = false;
@@ -249,7 +266,15 @@ export class ProfileComponent extends ModalController implements OnInit {
         this._sessionService.destroy();
     }
 
-    //Methods to use only in tha HTML
+
+    validatorEqual = (input: AbstractControl) => {
+        if(!input.value || input.value==="Start2Play"){
+            return null;
+        }
+        return {notEqual: true}
+      };
+
+    //Methods to use only in the HTML
     public getFormControl(field: string) {
         return this.profileForm.get(field) as FormControl;
     }
