@@ -3,7 +3,7 @@
         <div id="header">
             <div class="logo" (click)="home()"></div>
             <h2 class="profile" (click)="profileAction()">
-                <i class="fas fa-user-circle"></i>{{user ? user.name : 'Entrar/Cadastrar'}}
+                <i class="fas fa-user-circle"></i><span>{{user ? user.name : 'Entrar/Cadastrar'}}</span>
             </h2>
         </div>
         <div id="body-wrapper">

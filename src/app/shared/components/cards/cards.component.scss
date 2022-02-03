@@ -97,3 +97,17 @@
         margin-left: auto;
     }
 }
+
+
+@media (max-width: 550px){
+    .landscape {
+        width: calc(372px - 3rem);
+        height: calc(200px - 2rem);
+    }
+    .portrait {    
+        width: calc(120px - 3rem);
+        height: calc(190px - 3rem);
+    
+       
+    }
+}

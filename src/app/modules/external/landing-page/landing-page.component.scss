@@ -16,6 +16,14 @@
   gap: 2rem;
 }
 
+.landing{
+  display:none;
+}
+
+.poster{
+  display:block;
+}
+
 .image-container{
   height: 100%;
   width:100%;
@@ -37,29 +45,23 @@
 }
 
 
-// .coming-soon {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   width: 100%;
-//   max-width: 700px;
-//   height: 500px;
-//   margin: 0 auto;
-//   padding: 3rem 0 0 0;
-//   border-radius: 8px;
-//   background-color: $modal;
-//   box-shadow: 3px 3px 10px rgba(78, 74, 242, 0.75), 10px 10px 4px rgba(0, 0, 0, 0.2);
+@media (max-width: 750px){
+  .poster{
+    display:none;
+  }
+  .landing{
+    display:block;
+  }
 
-//   h1 {
-//     font-size: 2rem;
-//   }
+  .image-container{
+    height: 85%;
+    width:65%;
+  }
+  .game-description{
+    display:flex;
+    flex-direction: column;
+    gap: unset;
+    align-items: center;
+  }
 
-//   i {
-//     margin-top: 1rem;
-//     font-size: 5rem;
-//   }
-
-//   img {
-//     margin-bottom: 35px;
-//   }
-// }
+}

@@ -1,5 +1,5 @@
 <div class="container">
-    <div>
+    <div class="information">
         <div class="header">
             <h3>DETALHES DO USUÁRIO</h3>
             <div (click)="logOut()">
@@ -7,29 +7,45 @@
                 <i class="fas fa-sign-out-alt"></i>
             </div>
         </div>
-        <div class="user-info-container">
+        <div class="user-info-container" *ngIf="!profileForm.enabled">
+            <label>Nome</label>
+            <p>{{userSession.name}}</p>
+            <label>Email</label>
+            <p>{{userSession.email}}</p>
+            <label>Telefone</label>
+            <p>{{userSession.phone}}</p>
+            <label>Data de Nascimento</label>
+            <p>{{userSession.birthdate}}</p>
+        </div>
+        <div class="user-edit-container" *ngIf="profileForm.enabled">
             <s2p-input class="name" [field]="profileFormFields[0]" [control]="getFormControl('name')"></s2p-input>
             <s2p-input class="email" [field]="profileFormFields[1]" [control]="getFormControl('email')"></s2p-input>
             <s2p-input class="phone" [field]="profileFormFields[2]" [control]="getFormControl('phone')"></s2p-input>
             <div class="birth-date-container">
+                <label class="birthdate-label">Data de Nascimento</label>
                 <s2p-input [field]="profileFormFields[3]" [control]="getFormControl('birthDay')"></s2p-input>
                 <s2p-input [field]="profileFormFields[4]" [control]="getFormControl('birthMonth')"></s2p-input>
                 <s2p-input [field]="profileFormFields[5]" [control]="getFormControl('birthYear')"></s2p-input>
             </div>
+        </div>
+        <div class="footer-buttons">
             <s2p-button [isLoading]="isLoading.update" color="update blue" (click)="update()">
                 {{updateButtonText}}</s2p-button>
             <s2p-button  color="cancel red" (click)="cancel()">
                 {{cancelButtonText}}</s2p-button>
         </div>
     </div>
-    <div>
-        <img src="../../../../assets/images/characters/Killjoy.png" width= "350px" height="550px">
+    <div class="image">
+        <img src="../../../../assets/images/characters/Killjoy.png" >
     </div>
 </div>
 
 <s2p-modal id="modalPassword" (controller)="modalEvent($event)">
     <div class="passwordModal">
-        <s2p-input [field]="profileFormFields[6]" [control]="passwordControl"></s2p-input>
+        <div class="input-container">
+            <s2p-input [field]="profileFormFields[6]" [control]="passwordControl"></s2p-input>
+            <s2p-input class="confirm-word" [field]="profileFormFields[7]" [control]="confirWordControl"></s2p-input>
+        </div>
         <s2p-button [isLoading]="isLoading.delete" color="red" (click)="removeUser()">Apagar usuário</s2p-button>
     </div>
    
