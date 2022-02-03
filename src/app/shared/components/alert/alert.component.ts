@@ -53,6 +53,12 @@ export class AlertComponent implements OnInit {
     }
 
     showMessage(message: string, type: string) {
+
+        //if the incoming message is the same we are already showing
+        if(this.currentTimeout && this.message===message){
+            return;
+        }
+
         //if there is an alert already on the screen
         if(this.currentTimeout){
             clearTimeout(this.currentTimeout);
