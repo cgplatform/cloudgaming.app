@@ -243,6 +243,7 @@ export class ProfileComponent extends ModalController implements OnInit {
         this._userMutationService.delete(this.passwordControl.value).subscribe((result:any)=>{
             if (result.errors) {
                 this.isLoading.delete = false;
+                this.confirWordControl.reset();
                 for (const error of result.errors) {
                     if(error.message in ApiErrors){
                         this.appComponent.showMessage(ApiErrors[error.message],"warning");
@@ -258,6 +259,7 @@ export class ProfileComponent extends ModalController implements OnInit {
         },(fail:HttpErrorResponse)=>{
             this.appComponent.showMessage("Falha ao deletar usuário", "error");
             this.isLoading.delete=false;
+            this.confirWordControl.reset();
             this.closeModal("modalPassword");
         })
     }
