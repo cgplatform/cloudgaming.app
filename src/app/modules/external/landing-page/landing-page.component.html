@@ -7,8 +7,11 @@
 
 <s2p-modal id="modalStartGame" (controller)="modalEvent($event)">
    <div class="game-description">
-        <div class="image-container">
+        <div class="image-container poster">
             <img [src]="currentGame?.poster" width=100% height=100%>
+        </div>
+        <div class="image-container landing">
+            <img [src]="currentGame?.banner" width=100% height=100%>
         </div>
         <div class="description">
             <h2>{{currentGame?.game.name}}</h2>
