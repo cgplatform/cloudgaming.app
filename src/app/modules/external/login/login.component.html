@@ -1,6 +1,3 @@
-
-
-
 <div class="container">
     <div>
         <h1>ACESSAR CONTA</h1>
@@ -15,15 +12,17 @@
                 [field]="profileFormFields[1]"
                 [control]="getFormControl('password')"
             ></s2p-input>
-            <s2p-button
-                class="log-in"
-                [isLoading]="loading"
-                color="blue"
-                (click)="loggIn()"
-                posfix="fas fa-arrow-right"
-            >
-                Entrar
-            </s2p-button>
+            <div class="log-in">
+                <s2p-button
+                    [isLoading]="loading"
+                    color="blue"
+                    (click)="loggIn()"
+                    posfix="fas fa-arrow-right"
+                >
+                    Entrar
+                </s2p-button>
+            </div>
+
             <p class="createConta">
                 Ainda não possui uma conta?
                 <a href="/register">Registrar</a>
@@ -31,7 +30,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="image">
         <img
             src="../../../../assets/images/characters/jett.png"
             width="350px"

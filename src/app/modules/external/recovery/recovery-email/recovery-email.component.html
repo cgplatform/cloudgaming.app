@@ -7,19 +7,20 @@
                 [field]="profileFormFields[0]"
                 [control]="getFormControl('email')"
             ></s2p-input>
-            <s2p-button
-                class="continue"
-                [isLoading]="loading"
-                color="blue"
-                (click)="buttonClick()"
-                posfix="fas fa-arrow-right"
-            >
-                Continuar
-            </s2p-button>
+            <div class="continue">
+                <s2p-button
+                    [isLoading]="loading"
+                    color="blue"
+                    (click)="buttonClick()"
+                    posfix="fas fa-arrow-right"
+                >
+                    Continuar
+                </s2p-button>
+            </div>
         </div>
     </div>
 
-    <div>
+    <div class="image">
         <img
             src="../../../../assets/images/characters/jett.png"
             width="350px"
