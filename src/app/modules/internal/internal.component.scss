@@ -35,3 +35,13 @@
 #body-wrapper {
   margin-top: 2.5rem;
 }
+
+@media (max-width: 550px){
+  h2{
+    font-size: 1.7rem !important;
+    span{
+      display:none;
+    }
+  }
+  
+}
